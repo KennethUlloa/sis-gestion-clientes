@@ -1,2 +1,2 @@
-# sis-gestion-clientes
+# SISGECLI
 Sistema de gestión de clientes para gimnasio
