@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class ClienteTest {
     @Test
-    public void given_parameters_when_new_client_with_parameters_then_ok(){
+    public void given_client_parameters_when_new_client_with_parameters_then_ok(){
         String cedula = "1725292542";
         String nombres = "Angelo Alexandro";
         String apellidos = "Abad Abarca";
