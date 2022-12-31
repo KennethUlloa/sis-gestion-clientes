@@ -2,6 +2,7 @@ package menu.clientes;
 
 import clientes.Cliente;
 import menu.Opcion;
+import validacion.ValidadorCedula;
 
 import java.util.Scanner;
 
@@ -50,6 +51,5 @@ public class OpcionRegistrarCliente extends Opcion {
         );
 
         System.out.println(c);
-
     }
 }

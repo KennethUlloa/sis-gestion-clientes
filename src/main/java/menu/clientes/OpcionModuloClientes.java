@@ -9,6 +9,7 @@ public class OpcionModuloClientes extends Opcion {
 
     @Override
     public void ejecutar(Object... argumentos) {
-
+        MenuClientes menuClientes = new MenuClientes();
+        menuClientes.mostrarSeleccion();
     }
 }

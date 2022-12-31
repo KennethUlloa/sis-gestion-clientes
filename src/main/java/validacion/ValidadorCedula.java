@@ -5,17 +5,14 @@ import clientes.excepciones.ErrorCedula;
 import validacion.Validador;
 
 public class ValidadorCedula implements Validador {
+    private final String cedula;
 
-    Cliente cliente;
-
-    public ValidadorCedula(Cliente cliente) {
-        this.cliente = cliente;
+    public ValidadorCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     @Override
     public void validar() throws ErrorCedula{
-
-        String cedula=cliente.getCedula();
         validarCadenaVacia(cedula);
         validarSoloNumeros(cedula);
         validarLongitud(cedula);
@@ -23,7 +20,6 @@ public class ValidadorCedula implements Validador {
         validarTercerDigito(cedula);
         validarDigitoVerificador(cedula);
     }
-
 
     /**
      * Revisa que la cadena contenga únicamente números
