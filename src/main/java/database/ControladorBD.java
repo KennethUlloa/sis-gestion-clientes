@@ -1,0 +1,31 @@
+package database;
+
+import java.sql.*;
+
+public class ControladorBD {
+    private String url;
+    private static ControladorBD instance;
+    private ControladorBD(String url) {
+        this.url = url;
+    }
+
+    public static ControladorBD getInstance() {
+        if (instance == null){
+            instance = new ControladorBD("jdbc:sqlite:database.db");
+        }
+        return instance;
+    }
+
+    public SQLTable ejecutarSentencia(String sentencia) throws SQLException {
+        Connection connection = DriverManager.getConnection(this.url);
+        Statement statement = connection.createStatement();
+        PreparedStatement preparedStatement = connection.prepareStatement(sentencia);
+        if(preparedStatement.execute()){ //Si al ejecutar la sentencia existe un resultado
+            SQLTable table = new SQLTable(preparedStatement.getResultSet());
+            connection.close();
+            return table;
+        }
+        connection.close();
+        return null;
+    }
+}
