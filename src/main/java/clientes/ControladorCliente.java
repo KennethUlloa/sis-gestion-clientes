@@ -37,7 +37,7 @@ public class ControladorCliente {
 
             controladorBD.ejecutarSentencia(sentencia);
         }catch (SQLException ex){
-            System.out.println(ex.getMessage());
+
             throw new Exception("El sistema no pudo registral al cliente");
         }
     }
@@ -59,6 +59,15 @@ public class ControladorCliente {
                     telefonoContacto,correoElectronico,direccion);
         }catch (Exception ex){
             return null;
+        }
+    }
+
+    public void eliminarCliente(String cedula) throws Exception {
+        try{
+        controladorBD.ejecutarSentencia("delete from clientes where cedula="+cedula);
+        }catch (SQLException ex){
+
+            throw new Exception("El sistema no pudo eliminar al cliente");
         }
     }
 }
