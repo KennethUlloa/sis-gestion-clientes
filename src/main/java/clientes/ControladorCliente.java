@@ -17,7 +17,7 @@ public class ControladorCliente {
 
     public void registrarCliente(Cliente cliente) throws Exception{
 
-        ValidadorCedula validadorCedula = new ValidadorCedula(cliente);
+        ValidadorCedula validadorCedula = new ValidadorCedula(cliente.getCedula());
         validadorCedula.validar();
         String cedula = cliente.getCedula();
         String nombres = cliente.getNombres();

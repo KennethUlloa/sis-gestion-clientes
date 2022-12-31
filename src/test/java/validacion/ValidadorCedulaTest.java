@@ -14,7 +14,7 @@ public class ValidadorCedulaTest {
                 'M',"0963870957",
                 "Diana Abad","0964255255",
                 "abad14@gmail.com","Av.Maldonado");
-        ValidadorCedula val=new ValidadorCedula(c);
+        ValidadorCedula val=new ValidadorCedula(c.getCedula());
         Exception error=null;
         try {
             val.validar();
@@ -32,7 +32,7 @@ public class ValidadorCedulaTest {
                 'M',"0963870957",
                 "Diana Abad","0964255255",
                 "abad14@gmail.com","Av.Maldonado");
-        ValidadorCedula val=new ValidadorCedula(c);
+        ValidadorCedula val=new ValidadorCedula(c.getCedula());
         Exception error=null;
         try {
             val.validar();
