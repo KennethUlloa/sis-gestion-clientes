@@ -73,4 +73,20 @@ public class Cliente {
     public String getDireccion() {
         return direccion;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "cedula='" + cedula + '\'' +
+                ", nombres='" + nombres + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", fecha=" + fecha +
+                ", sexo=" + sexo +
+                ", telefono='" + telefono + '\'' +
+                ", nombreContacto='" + nombreContacto + '\'' +
+                ", telefonoContacto='" + telefonoContacto + '\'' +
+                ", correoElectronico='" + correoElectronico + '\'' +
+                ", direccion='" + direccion + '\'' +
+                '}';
+    }
 }

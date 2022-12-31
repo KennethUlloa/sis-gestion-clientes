@@ -44,7 +44,17 @@ public class MenuParameterTest {
     public void setUpTest() {
         System.out.println("Test with " + option);
         System.setOut(new PrintStream(outContent));
-        menu = new Menu();
+        menu = new Menu("MENU") {
+            @Override
+            public boolean cerrarMenu(int op) {
+                return true;
+            }
+
+            @Override
+            public boolean validarOpcion(int opcion) {
+                return true;
+            }
+        };
         menuOutput = "====== MENU ======\r\n";
         for(Object[] param : MenuParameterTest.input()){
             menu.agregarOpcion(new Opcion("Opción " + param[0]) {
@@ -53,7 +63,7 @@ public class MenuParameterTest {
                     System.out.println(param[1]);
                 }
             });
-            menuOutput += param[0] + ") " + "Opción " + param[0] + "\r\n";
+            menuOutput += "    " + param[0] + ") " + "Opción " + param[0] + "\r\n";
         }
         menuOutput += ">> "+optionOutput+"\r\n";
 
