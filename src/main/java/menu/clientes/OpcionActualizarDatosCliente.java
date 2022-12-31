@@ -11,9 +11,8 @@ public class OpcionActualizarDatosCliente extends Opcion {
 
     @Override
     public void ejecutar(Object... argumentos) {
-        System.out.print("* Número de cédula del cliente >> ");
-        Scanner scanner = new Scanner(System.in);
-        String numeroCedula = scanner.next();
+        MenuActualizacionDatosCliente menu = new MenuActualizacionDatosCliente();
+        menu.mostrarSeleccion();
 
     }
 }
