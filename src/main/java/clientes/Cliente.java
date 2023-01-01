@@ -1,7 +1,6 @@
 package clientes;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Cliente {
     private String cedula;
@@ -20,7 +19,7 @@ public class Cliente {
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.fecha = stringALocalDate(fecha);
+        this.fecha = Parser.stringALocalDate(fecha);
         this.sexo = sexo;
         this.telefono = telefono;
         this.nombreContacto = nombreContacto;
@@ -28,10 +27,6 @@ public class Cliente {
         this.correoElectronico = correoElectronico;
         this.direccion = direccion;
 
-    }
-
-    public static LocalDate stringALocalDate(String fecha) {
-        return LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     public String getCedula() {
