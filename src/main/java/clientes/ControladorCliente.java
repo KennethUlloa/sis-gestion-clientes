@@ -62,6 +62,43 @@ public class ControladorCliente {
         }
     }
 
+    public void actualizarCliente(Cliente cliente) throws Exception{
+
+        String cedula = cliente.getCedula();
+        String nombres = cliente.getNombres();
+        String apellidos = cliente.getApellidos();
+        LocalDate fecha = cliente.getFecha();
+        String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        char sexo = cliente.getSexo();
+        String telefono=cliente.getTelefono();
+        String nombreContacto = cliente.getNombreContacto();
+        String telefonoContacto = cliente.getTelefonoContacto();
+        String correoElectronico = cliente.getCorreoElectronico();
+        String direccion = cliente.getDireccion();
+
+        try{
+            String formato = "UPDATE clientes\n" +
+                    "   SET cedula = '%s',\n" +
+                    "       nombres = '%s',\n" +
+                    "       apellidos = '%s',\n" +
+                    "       sexo = '%s',\n" +
+                    "       fecha_nacimiento = '%s',\n" +
+                    "       correo_electronico = '%s',\n" +
+                    "       telefono = '%s',\n" +
+                    "       nombre_contacto = '%s',\n" +
+                    "       telefono_contacto = '%s',\n" +
+                    "       direccion = '%s'\n" +
+                    " WHERE cedula = '%s';";
+
+            String sentencia = String.format(formato, cedula, nombres, apellidos, sexo, fechaFormateada, correoElectronico, telefono, nombreContacto, telefonoContacto, direccion,cedula);
+            controladorBD.ejecutarSentencia(sentencia);
+        }catch (Exception ex){
+
+            throw new Exception("El sistema no pudo actualizar el cliente");
+        }
+
+    }
+
     public void eliminarCliente(String cedula) throws Exception {
         try{
         controladorBD.ejecutarSentencia("delete from clientes where cedula="+cedula);
@@ -70,4 +107,6 @@ public class ControladorCliente {
             throw new Exception("El sistema no pudo eliminar al cliente");
         }
     }
+
+
 }
