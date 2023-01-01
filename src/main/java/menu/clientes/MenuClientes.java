@@ -8,6 +8,7 @@ public class MenuClientes extends Menu {
         super("MÓDULO DE CLIENTES");
         agregarOpcion(new OpcionRegistrarCliente());
         agregarOpcion(new OpcionActualizarDatosCliente());
+        agregarOpcion(new OpcionEliminarCliente());
         agregarOpcion(new OpcionRegresar());
     }
 
