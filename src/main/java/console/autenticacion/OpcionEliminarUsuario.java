@@ -1,6 +1,7 @@
-package menu.autenticacion;
+package console.autenticacion;
 
-import menu.Opcion;
+
+import console.Opcion;
 
 public class OpcionEliminarUsuario extends Opcion {
     public OpcionEliminarUsuario() {

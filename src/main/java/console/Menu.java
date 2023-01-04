@@ -6,6 +6,7 @@ import java.util.Scanner;
 public abstract class Menu {
     private final String titulo;
     private ArrayList<Opcion> opciones;
+    private boolean repetir = true;
 
     public Menu(String titulo) {
         this.titulo = titulo;
@@ -37,16 +38,23 @@ public abstract class Menu {
             if(validarOpcion(op)){
                 obtenerOpcion(op - 1).ejecutar();
             }
-        }while(!cerrarMenu(op));
+
+        }while(repetir);
+
     }
 
     public int contarOpciones() {
         return opciones.size();
     }
 
-    public abstract boolean cerrarMenu(int op);
+    public boolean validarOpcion(int opcion) {
+        return opcion-1 >= 0 && opcion-1 < contarOpciones();
+    }
 
-    public abstract boolean validarOpcion(int opcion);
+    public void cerrarMenu() {
+        repetir = false;
+    }
+
 
 
 }

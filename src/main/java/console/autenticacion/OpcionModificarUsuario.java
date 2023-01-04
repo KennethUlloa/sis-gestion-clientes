@@ -1,6 +1,6 @@
-package menu.autenticacion;
+package console.autenticacion;
 
-import menu.Opcion;
+import console.Opcion;
 
 public class OpcionModificarUsuario extends Opcion {
     public OpcionModificarUsuario() {

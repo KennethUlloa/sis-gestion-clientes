@@ -1,7 +1,6 @@
-package menu.autenticacion;
+package console.autenticacion;
 
-import menu.Opcion;
-
+import console.Opcion;
 public class OpcionModuloRegistroUsuarios extends Opcion {
 
     public OpcionModuloRegistroUsuarios() {

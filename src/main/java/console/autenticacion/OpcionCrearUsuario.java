@@ -1,7 +1,6 @@
-package menu.autenticacion;
+package console.autenticacion;
 
-import menu.Opcion;
-
+import console.Opcion;
 public class OpcionCrearUsuario extends Opcion {
     public OpcionCrearUsuario() {
         super("Crear nuevo usuario");

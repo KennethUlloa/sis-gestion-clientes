@@ -3,8 +3,10 @@ package console;
 import java.util.Scanner;
 
 public class OpcionSalir extends Opcion{
-    public OpcionSalir() {
+    private MenuPrincipal targetMenu;
+    public OpcionSalir(MenuPrincipal targetMenu) {
         super("Salir");
+        this.targetMenu = targetMenu;
     }
 
     @Override
@@ -13,7 +15,8 @@ public class OpcionSalir extends Opcion{
         Scanner scanner = new Scanner(System.in);
         String op = scanner.next();
         if ("s".equals(op)) {
-            System.exit(0);
+            targetMenu.cerrarMenu();
+            //System.exit(0);
         }
     }
 }
