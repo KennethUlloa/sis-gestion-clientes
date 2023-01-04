@@ -1,4 +1,4 @@
-package menu;
+package console;
 
 public abstract class Opcion {
     private String descripcion;

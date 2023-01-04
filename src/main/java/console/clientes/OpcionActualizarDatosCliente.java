@@ -1,8 +1,6 @@
-package menu.clientes;
+package console.clientes;
 
-import menu.Opcion;
-
-import java.util.Scanner;
+import console.Opcion;
 
 public class OpcionActualizarDatosCliente extends Opcion {
     public OpcionActualizarDatosCliente() {

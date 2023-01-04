@@ -1,7 +1,7 @@
-package menu.clientes;
+package console.clientes;
 
-import menu.Menu;
-import menu.OpcionRegresar;
+import console.Menu;
+import console.OpcionRegresar;
 
 public class MenuActualizacionDatosCliente extends Menu {
     public MenuActualizacionDatosCliente() {

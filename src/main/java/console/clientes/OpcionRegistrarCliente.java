@@ -1,8 +1,7 @@
-package menu.clientes;
+package console.clientes;
 
 import clientes.Cliente;
-import menu.Opcion;
-import validacion.ValidadorCedula;
+import console.Opcion;
 
 import java.util.Scanner;
 

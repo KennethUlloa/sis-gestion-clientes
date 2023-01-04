@@ -1,4 +1,4 @@
-package menu.clientes;
+package console.clientes;
 
 import org.junit.After;
 import org.junit.Before;

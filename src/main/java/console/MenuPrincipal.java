@@ -1,6 +1,6 @@
-package menu;
+package console;
 
-import menu.clientes.OpcionModuloClientes;
+import console.clientes.OpcionModuloClientes;
 
 public class MenuPrincipal extends Menu {
 

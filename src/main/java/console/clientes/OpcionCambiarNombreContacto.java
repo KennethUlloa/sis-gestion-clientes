@@ -1,6 +1,6 @@
-package menu.clientes;
+package console.clientes;
 
-import menu.Opcion;
+import console.Opcion;
 
 public class OpcionCambiarNombreContacto extends Opcion {
     public OpcionCambiarNombreContacto(){

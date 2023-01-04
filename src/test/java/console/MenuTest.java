@@ -1,4 +1,4 @@
-package menu;
+package console;
 
 import org.junit.After;
 import org.junit.Before;
