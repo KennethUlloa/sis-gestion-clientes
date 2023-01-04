@@ -63,7 +63,7 @@ public class ControladorCliente {
     }
 
     public void actualizarCliente(Cliente cliente) throws Exception{
-
+        //TODO: borrar comentarios guia
         String cedula = cliente.getCedula();
         String nombres = cliente.getNombres();
         String apellidos = cliente.getApellidos();
@@ -78,7 +78,7 @@ public class ControladorCliente {
 
         try{
             String formato = "UPDATE clientes\n" +
-                    "   SET cedula = '%s',\n" +
+                    //"   SET cedula = '%s',\n" + NO SE ACTUALIZA EL ID JAMÁS!!!!
                     "       nombres = '%s',\n" +
                     "       apellidos = '%s',\n" +
                     "       sexo = '%s',\n" +
