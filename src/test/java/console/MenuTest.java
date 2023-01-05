@@ -24,15 +24,7 @@ public class MenuTest {
     @Test
     public void given_menu_when_show_options_then_ok() {
         Menu menu = new Menu("MENU") {
-            @Override
-            public boolean cerrarMenu(int op) {
-                return true;
-            }
 
-            @Override
-            public boolean validarOpcion(int opcion) {
-                return true;
-            }
         };
         menu.agregarOpcion(new Opcion("Opción 1") {
             @Override

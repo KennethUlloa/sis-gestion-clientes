@@ -20,7 +20,7 @@ public class OpcionRegistrarCliente extends Opcion {
         String nombres = scanner.nextLine();
         System.out.print("* Apellidos >> ");
         String apellidos = scanner.nextLine();
-        System.out.println("* Fecha de nacimiento (dd-mm-aaaa) >> ");
+        System.out.print("* Fecha de nacimiento (dd-mm-aaaa) >> ");
         String fechaNacimiento = scanner.next();
         System.out.print("* Sexo (M/F) >> ");
         char sexo = scanner.next().charAt(0);

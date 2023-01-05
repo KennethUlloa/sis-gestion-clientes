@@ -45,15 +45,6 @@ public class MenuParameterTest {
         System.out.println("Test with " + option);
         System.setOut(new PrintStream(outContent));
         menu = new Menu("MENU") {
-            @Override
-            public boolean cerrarMenu(int op) {
-                return true;
-            }
-
-            @Override
-            public boolean validarOpcion(int opcion) {
-                return true;
-            }
         };
         menuOutput = "====== MENU ======\r\n";
         for(Object[] param : MenuParameterTest.input()){
