@@ -30,5 +30,13 @@ public class ControladorBDTest {
         System.out.println(expected);
         assertEquals(row, expected);
     }
+    @Test
+    public void given_connection_when_multiple_sentences_then_ok() throws SQLException {
+        ControladorBD controladorBD = ControladorBD.getInstance();
+        String[] sentencias = new String[] {
+                "UPDATE Test SET Column1='Dato 3' WHERE id=1",
+                "UPDATE Test SET Column1='Dato _4' WHERE id=4"};
+        controladorBD.ejecutarSentencias(sentencias);
+    }
 
 }

@@ -19,7 +19,7 @@ public class Cliente {
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.fecha = Parser.stringALocalDate(fecha);
+        this.fecha = Parser.toLocalDate(fecha);
         this.sexo = sexo;
         this.telefono = telefono;
         this.nombreContacto = nombreContacto;
@@ -103,5 +103,9 @@ public class Cliente {
                 "   correoElectronico='" + correoElectronico + "'\n" +
                 "   direccion='" + direccion + "'\n" +
                 '}';
+    }
+
+    public String getNombreCompleto() {
+        return nombres + " " + apellidos;
     }
 }

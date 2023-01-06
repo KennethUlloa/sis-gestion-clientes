@@ -1,5 +1,6 @@
 package clientes;
 
+import clientes.excepciones.ErrorCedula;
 import database.ControladorBD;
 import database.SQLTable;
 import validacion.ValidadorCedula;
@@ -14,6 +15,7 @@ public class ControladorCliente {
     public ControladorCliente(ControladorBD controladorBD) {
         this.controladorBD = controladorBD;
     }
+    public ControladorCliente() {this.controladorBD = ControladorBD.getInstance();}
 
     public void registrarCliente(Cliente cliente) throws Exception{
 
@@ -42,9 +44,11 @@ public class ControladorCliente {
         }
     }
 
-    public Cliente consultarCliente(String cedula){
+    public Cliente consultarCliente(String cedula) throws ErrorCedula {
+        new ValidadorCedula(cedula).validar();
         try{
             SQLTable resultado = controladorBD.ejecutarSentencia("select * from clientes where cedula="+cedula);
+            if(resultado.getRowCount() == 0) return null;
             String nombres = (String) resultado.getValueAt(0,"nombres");
             String apellidos = (String) resultado.getValueAt(0,"apellidos");
             String fecha = (String)resultado.getValueAt(0,"fecha_nacimiento");

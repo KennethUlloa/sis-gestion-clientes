@@ -2,7 +2,6 @@ package clientes;
 
 import database.ControladorBD;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.SQLException;
