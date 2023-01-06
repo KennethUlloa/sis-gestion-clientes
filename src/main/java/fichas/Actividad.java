@@ -10,4 +10,25 @@ public class Actividad {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+
+    public String getID() {
+        return ID;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Actividad{" + "\n" +
+                "ID='" + ID + '\'' + "\n" +
+                ", nombre='" + nombre + '\'' + "\n" +
+                ", descripcion='" + descripcion + '\'' + "\n" +
+                '}';
+    }
 }

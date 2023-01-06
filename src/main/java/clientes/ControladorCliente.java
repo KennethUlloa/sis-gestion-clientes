@@ -14,6 +14,7 @@ public class ControladorCliente {
     public ControladorCliente(ControladorBD controladorBD) {
         this.controladorBD = controladorBD;
     }
+    public ControladorCliente() {this.controladorBD = ControladorBD.getInstance();}
 
     public void registrarCliente(Cliente cliente) throws Exception{
 

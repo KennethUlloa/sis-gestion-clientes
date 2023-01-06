@@ -18,7 +18,6 @@ public class ControladorBD {
 
     public SQLTable ejecutarSentencia(String sentencia) throws SQLException {
         Connection connection = DriverManager.getConnection(this.url);
-        Statement statement = connection.createStatement();
         PreparedStatement preparedStatement = connection.prepareStatement(sentencia);
         if(preparedStatement.execute()){ //Si al ejecutar la sentencia existe un resultado
             SQLTable table = new SQLTable(preparedStatement.getResultSet());
@@ -27,5 +26,14 @@ public class ControladorBD {
         }
         connection.close();
         return null;
+    }
+
+    public void ejecutarSentencias(String... sentencias) throws SQLException {
+        Connection connection = DriverManager.getConnection(this.url);
+        Statement statement = connection.createStatement();
+        for(String sentencia: sentencias){
+            statement.addBatch(sentencia);
+        }
+        statement.executeBatch();
     }
 }

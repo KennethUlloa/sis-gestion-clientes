@@ -5,7 +5,7 @@ import console.OpcionRegresar;
 
 public class MenuClientes extends Menu {
     public MenuClientes() {
-        super("MÓDULO DE CLIENTES");
+        super("MENÚ DE CLIENTES");
         agregarOpcion(new OpcionRegistrarCliente());
         agregarOpcion(new OpcionActualizarDatosCliente());
         agregarOpcion(new OpcionEliminarCliente());
