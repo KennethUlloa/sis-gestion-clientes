@@ -17,6 +17,7 @@ public class SQLTable {
     public SQLTable(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
         int columnCount = metaData.getColumnCount();
+        tableName = metaData.getTableName(1);
         columnIndex = new HashMap<>();
         rows = new ArrayList<>();
         //Fill the column names

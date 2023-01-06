@@ -1,6 +1,7 @@
 package console.clientes;
 
 import clientes.Cliente;
+import clientes.ControladorCliente;
 import console.Opcion;
 
 import java.util.Scanner;
@@ -49,6 +50,11 @@ public class OpcionRegistrarCliente extends Opcion {
                 direccion
         );
 
-        System.out.println(c);
+        ControladorCliente controladorCliente = new ControladorCliente();
+        try {
+            controladorCliente.registrarCliente(c);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

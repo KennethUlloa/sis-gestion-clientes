@@ -16,9 +16,11 @@ public abstract class Menu {
 
     public void mostrarOpciones() {
         System.out.println("====== " + titulo + " ======");
+        antesDeOpciones();
         for(int i = 0; i < opciones.size() ; i++) {
             System.out.println("    " + (i+1) + ") " + opciones.get(i));
         }
+        despuesDeOpciones();
     }
 
     public void setArguments(Object... arguments) {
@@ -36,6 +38,10 @@ public abstract class Menu {
     public Opcion obtenerOpcion(int index) {
         return opciones.get(index);
     }
+
+    public void antesDeOpciones() {}
+
+    public void despuesDeOpciones() {}
 
     public void mostrarSeleccion() {
         Scanner scanner = new Scanner(System.in);

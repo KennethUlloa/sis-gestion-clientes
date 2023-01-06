@@ -21,13 +21,18 @@ public class ValidadorCedulaTest {
 
     @Test
     public void given_new_client_when_valid_cedula_then_ok() throws ErrorCedula {
-        Cliente c= new Cliente("1753953866","Angelo Alexandro",
+        Cliente c= new Cliente("172635479","Angelo Alexandro",
                 "Abad Abarca","15-08-1997",
                 'M',"0963870957",
                 "Diana Abad","0964255255",
                 "abad14@gmail.com","Av.Maldonado");
         ValidadorCedula val=new ValidadorCedula(c.getCedula());
         val.validar();
+    }
+    @Test(expected = ErrorCedula.class)
+    public void algoritmo_cedula() throws ErrorCedula {
+        ValidadorCedula validadorCedula = new ValidadorCedula("172635479");
+        validadorCedula.validar();
     }
 
 }

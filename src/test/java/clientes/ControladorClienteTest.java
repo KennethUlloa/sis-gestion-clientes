@@ -1,5 +1,6 @@
 package clientes;
 
+import clientes.excepciones.ErrorCedula;
 import database.ControladorBD;
 import org.junit.After;
 import org.junit.Test;
@@ -42,7 +43,12 @@ public class ControladorClienteTest {
             e.printStackTrace();
         }
 
-        Cliente clienteConsultado =controladorCliente.consultarCliente("1725292542");
+        Cliente clienteConsultado = null;
+        try {
+            clienteConsultado = controladorCliente.consultarCliente("1725292542");
+        } catch (ErrorCedula e) {
+            e.printStackTrace();
+        }
         System.out.println(clienteConsultado.toString());
 
         assertNotNull(clienteConsultado);
@@ -78,9 +84,6 @@ public class ControladorClienteTest {
         assertEquals(telefono_nuevo,clienteConsultado.getTelefono());
         assertEquals(telefonoContacto_nuevo,clienteConsultado.getTelefonoContacto());
         assertEquals(correoElectronico_nuevo,clienteConsultado.getCorreoElectronico());
-
-
-
     }
 
     @Test
@@ -101,20 +104,22 @@ public class ControladorClienteTest {
         }
 
         controladorCliente.eliminarCliente("1725292542");
-
+    }
+    @Test(expected = ErrorCedula.class)
+    public void given_wrong_cedula_when_registry_then_error() throws Exception {
+        Cliente cliente = new Cliente("172635479", "Angelo Alexandro",
+                "Abad Abarca", "15-08-1997",
+                'M', "0963870957",
+                "Diana Abad", "0964255255",
+                "abad14@gmail.com", "Av.Maldonado");
+        controladorCliente.registrarCliente(cliente);
 
     }
 
-
-    @After
     public void tearDown(){
 
         controladorBD = ControladorBD.getInstance();
-        try {
-            controladorBD.ejecutarSentencia("DELETE FROM clientes;");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
     }
 }

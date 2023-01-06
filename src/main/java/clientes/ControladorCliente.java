@@ -21,6 +21,7 @@ public class ControladorCliente {
 
         ValidadorCedula validadorCedula = new ValidadorCedula(cliente.getCedula());
         validadorCedula.validar();
+        System.out.println("valio");
         String cedula = cliente.getCedula();
         String nombres = cliente.getNombres();
         String apellidos = cliente.getApellidos();
@@ -36,11 +37,10 @@ public class ControladorCliente {
         String formato = "INSERT INTO clientes VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')";
         String sentencia = String.format(formato, cedula, nombres, apellidos, sexo, fechaFormateada, correoElectronico, telefono, nombreContacto, telefonoContacto, direccion);
         try{
-
             controladorBD.ejecutarSentencia(sentencia);
         }catch (SQLException ex){
 
-            throw new Exception("El sistema no pudo registral al cliente");
+            throw new Exception("El sistema no pudo registrar al cliente");
         }
     }
 
