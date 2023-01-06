@@ -104,4 +104,8 @@ public class Cliente {
                 "   direccion='" + direccion + "'\n" +
                 '}';
     }
+
+    public String getNombreCompleto() {
+        return nombres + " " + apellidos;
+    }
 }

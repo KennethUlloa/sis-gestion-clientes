@@ -7,6 +7,7 @@ public abstract class Menu {
     private final String titulo;
     private ArrayList<Opcion> opciones;
     private boolean repetir = true;
+    private Object[] arguments;
 
     public Menu(String titulo) {
         this.titulo = titulo;
@@ -18,6 +19,14 @@ public abstract class Menu {
         for(int i = 0; i < opciones.size() ; i++) {
             System.out.println("    " + (i+1) + ") " + opciones.get(i));
         }
+    }
+
+    public void setArguments(Object... arguments) {
+        this.arguments = arguments;
+    }
+
+    public Object[] getArguments() {
+        return arguments;
     }
 
     public void agregarOpcion(Opcion opcion) {
@@ -36,7 +45,7 @@ public abstract class Menu {
             System.out.print(">> ");
             op = scanner.nextInt();
             if(validarOpcion(op)){
-                obtenerOpcion(op - 1).ejecutar();
+                obtenerOpcion(op - 1).ejecutar(arguments);
             }
 
         }while(repetir);

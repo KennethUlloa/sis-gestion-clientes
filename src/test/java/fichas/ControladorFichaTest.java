@@ -2,6 +2,7 @@ package fichas;
 
 import clientes.Cliente;
 import clientes.ControladorCliente;
+import clientes.excepciones.ErrorCedula;
 import database.exceptions.NoSuchColumn;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +19,14 @@ public class ControladorFichaTest {
     }
 
     @Test
-    public void given_record_when_success_query_then_ok() throws SQLException, NoSuchColumn {
+    public void given_record_when_success_query_then_ok() throws SQLException, NoSuchColumn, ErrorCedula {
         Ficha f = controladorFicha.consultarFicha("F1");
         System.out.println(f);
         assertNotNull(f);
     }
 
     @Test
-    public void given_record_when_update_then_ok() throws SQLException, NoSuchColumn {
+    public void given_record_when_update_then_ok() throws SQLException, NoSuchColumn, ErrorCedula {
         Ficha ficha = controladorFicha.consultarFicha("F1");
         double nuevoPeso = 65.0;
         ficha.setPeso(nuevoPeso);

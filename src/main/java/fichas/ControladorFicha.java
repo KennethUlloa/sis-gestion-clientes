@@ -3,6 +3,7 @@ package fichas;
 import clientes.Cliente;
 import clientes.ControladorCliente;
 import clientes.Parser;
+import clientes.excepciones.ErrorCedula;
 import database.ControladorBD;
 import database.SQLTable;
 import database.exceptions.NoSuchColumn;
@@ -18,7 +19,7 @@ public class ControladorFicha {
         controladorBD = ControladorBD.getInstance();
         controladorCliente = new ControladorCliente();
     }
-    public Ficha consultarFicha(String ID) throws SQLException, NoSuchColumn {
+    public Ficha consultarFicha(String ID) throws SQLException, NoSuchColumn, ErrorCedula {
         //Consultar cliente
         SQLTable result = controladorBD.ejecutarSentencia("select f.ID, f.cliente, f.peso, f.altura, f.fecha_inicio, f.ultima_asistencia, f.esta_activo, h.hora_inicio, h.hora_fin, h.dia, h.actividad, a.nombre, a.descripcion\n" +
                 "from ficha_cliente as f, horarios_actividades as h, actividades as a \n" +

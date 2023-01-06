@@ -2,6 +2,7 @@ package console;
 
 import console.autenticacion.OpcionModuloRegistroUsuarios;
 import console.clientes.OpcionModuloClientes;
+import console.fichas.OpcionModuloFichas;
 
 public class MenuPrincipal extends Menu {
 
@@ -9,11 +10,7 @@ public class MenuPrincipal extends Menu {
         super("MENU PRINCIPAL");
         agregarOpcion(new OpcionModuloRegistroUsuarios());
         agregarOpcion(new OpcionModuloClientes());
+        agregarOpcion(new OpcionModuloFichas());
         agregarOpcion(new OpcionSalir(this));
-    }
-
-    @Override
-    public boolean validarOpcion(int opcion) {
-        return opcion-1 >= 0 && opcion-1 < contarOpciones();
     }
 }
