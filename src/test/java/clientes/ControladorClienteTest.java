@@ -72,10 +72,7 @@ public class ControladorClienteTest {
     public void given_client_cedula_when_delete_client_then_ok() throws Exception {
         try {
             controladorCliente.registrarCliente(cliente);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        } catch (Exception e) {}
         controladorCliente.eliminarCliente("1725292542");
     }
     @Test(expected = ErrorCedula.class)

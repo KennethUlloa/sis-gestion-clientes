@@ -32,7 +32,6 @@ public class ControladorBDTest {
     @Test
     public void given_sql_sentence_when_not_null_then_ok() throws SQLException {
         SQLTable result = controladorBD.ejecutarSentencia("select * from Test");
-        System.out.println(result);
         assertNotNull(result);
     }
 
