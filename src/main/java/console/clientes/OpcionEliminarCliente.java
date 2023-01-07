@@ -1,10 +1,11 @@
 package console.clientes;
 
+import console.Menu;
 import console.Opcion;
 
 public class OpcionEliminarCliente extends Opcion {
-    public OpcionEliminarCliente() {
-        super("Eliminar cliente");
+    public OpcionEliminarCliente(Menu menu) {
+        super("Eliminar cliente", menu);
     }
 
     @Override

@@ -3,6 +3,10 @@ package console.clientes;
 import clientes.Cliente;
 import clientes.ControladorCliente;
 import console.Opcion;
+import console.input.Input;
+import console.input.NoActionCaster;
+import validacion.ValidadorCedula;
+import validacion.ValidadorInactivo;
 
 import java.util.Scanner;
 
@@ -13,31 +17,18 @@ public class OpcionRegistrarCliente extends Opcion {
 
     @Override
     public void ejecutar(Object... argumentos) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("* Número de cédula >> ");
-        String cedula = scanner.next();
-        System.out.print("* Nombres >> ");
-        scanner.nextLine();
-        String nombres = scanner.nextLine();
-        System.out.print("* Apellidos >> ");
-        String apellidos = scanner.nextLine();
-        System.out.print("* Fecha de nacimiento (dd-mm-aaaa) >> ");
-        String fechaNacimiento = scanner.next();
-        System.out.print("* Sexo (M/F) >> ");
-        char sexo = scanner.next().charAt(0);
-        System.out.print("* Teléfono >> ");
-        String telefono = scanner.next();
-        scanner.nextLine();
-        System.out.print("* Nombre del contacto >> ");
-        String nombreContacto = scanner.nextLine();
-        System.out.print("* Teléfono del contacto >> ");
-        String telefonoContacto = scanner.next();
-        System.out.print("* Correo electrónico >> ");
-        String correoElectronico = scanner.next();
-        scanner.nextLine();
-        System.out.print("* Dirección >> ");
-        String direccion = scanner.nextLine();
-        Cliente c = new Cliente(
+        Input input = new Input(Input.NEXT_LINE, new Scanner(System.in));
+        String cedula = input.get("* Número de cédula >> ", new ValidadorCedula(""), new NoActionCaster<String>(), true);
+        String nombres = input.get("* Nombres >> ");
+        String apellidos = input.get("* Apellidos >> ");
+        String fechaNacimiento = input.get("* Fecha de nacimiento (dd-mm-aaaa) >> ");
+        char sexo = input.get("* Sexo (M/F) >> ").charAt(0);
+        String telefono = input.get("* Teléfono >> ");
+        String nombreContacto = input.get("* Nombre del contacto >> ");
+        String telefonoContacto = input.get("* Teléfono del contacto >> ");
+        String correoElectronico = input.get("* Correo electrónico >> ");
+        String direccion = input.get("* Dirección >> ");
+        Cliente cliente = new Cliente(
                 cedula,
                 nombres,
                 apellidos,
@@ -52,7 +43,8 @@ public class OpcionRegistrarCliente extends Opcion {
 
         ControladorCliente controladorCliente = new ControladorCliente();
         try {
-            controladorCliente.registrarCliente(c);
+            controladorCliente.registrarCliente(cliente);
+            System.out.println(cliente);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

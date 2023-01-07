@@ -46,7 +46,7 @@ public abstract class Menu {
     public void mostrarSeleccion() {
         Scanner scanner = new Scanner(System.in);
         int op = 0;
-        do{
+        while(repetir){
             mostrarOpciones();
             System.out.print(">> ");
             op = scanner.nextInt();
@@ -54,8 +54,7 @@ public abstract class Menu {
                 obtenerOpcion(op - 1).ejecutar(arguments);
             }
 
-        }while(repetir);
-
+        };
     }
 
     public int contarOpciones() {

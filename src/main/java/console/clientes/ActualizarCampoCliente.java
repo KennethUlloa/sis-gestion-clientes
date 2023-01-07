@@ -3,33 +3,18 @@ package console.clientes;
 import clientes.Cliente;
 import clientes.ControladorCliente;
 import clientes.excepciones.ErrorCedula;
-import console.Menu;
-import console.Opcion;
 import console.input.Input;
 import console.input.NoActionCaster;
 import validacion.ValidadorCedula;
 
 import java.util.Scanner;
 
-public class OpcionCambiarCorreo extends Opcion {
-    public OpcionCambiarCorreo(Menu parent) {
-        super("Cambiar el correo electrónico del cliente", parent);
+public abstract class ActualizarCampoCliente {
+
+    public ActualizarCampoCliente() {
     }
 
-    @Override
-    public void ejecutar(Object... argumentos) {
-        //TODO: Verificar el correo ingresado
-        ActualizarCampoCliente actualizarCampoCliente = new ActualizarCampoCliente() {
-            @Override
-            public void actualizacionEspecifica(Cliente cliente, Input input) {
-                System.out.println("* Correo actual: " + cliente.getCorreoElectronico());
-                String correo = input.get("* Ingresa el nuevo correo >> ");
-                cliente.setCorreoElectronico(correo);
-            }
-        };
-
-        actualizarCampoCliente.actualizar(argumentos);
-        /*
+    public void actualizar(Object... argumentos) {
         Input input = new Input(new Scanner(System.in));
         Cliente cliente = null;
         ControladorCliente controladorCliente = new ControladorCliente();
@@ -43,12 +28,12 @@ public class OpcionCambiarCorreo extends Opcion {
         }
         try{
             cliente = (cliente == null)? (Cliente) argumentos[0] : cliente;
-            System.out.println("* Correo actual: " + cliente.getCorreoElectronico());
-            String correo = input.get("* Ingresa el nuevo correo >> ");
-            cliente.setCorreoElectronico(correo);
+            actualizacionEspecifica(cliente, input);
             controladorCliente.actualizarCliente(cliente);
         }catch (Exception e) {
             System.out.println(e.getMessage());
-        }*/
+        }
     }
+
+    public abstract void actualizacionEspecifica(Cliente cliente, Input input);
 }

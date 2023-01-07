@@ -4,8 +4,8 @@ import clientes.Cliente;
 import clientes.excepciones.ErrorCedula;
 import validacion.Validador;
 
-public class ValidadorCedula implements Validador {
-    private final String cedula;
+public class ValidadorCedula implements Validador<String> {
+    private String cedula;
 
     public ValidadorCedula(String cedula) {
         this.cedula = cedula;
@@ -19,6 +19,12 @@ public class ValidadorCedula implements Validador {
         validarPrimerosDigitos(cedula);
         validarTercerDigito(cedula);
         validarDigitoVerificador(cedula);
+    }
+
+    @Override
+    public void validar(String argument) throws Exception {
+        this.cedula = argument;
+        validar();
     }
 
     /**

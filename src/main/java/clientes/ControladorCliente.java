@@ -64,7 +64,6 @@ public class ControladorCliente {
     }
 
     public void actualizarCliente(Cliente cliente) throws Exception{
-        //TODO: borrar comentarios guia
         String cedula = cliente.getCedula();
         String nombres = cliente.getNombres();
         String apellidos = cliente.getApellidos();
