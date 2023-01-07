@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Ficha {
     private String ID;
     private Cliente cliente;
-    private ArrayList<RegistroActividad> registroActividades;
+    private ArrayList<Horario> horarios;
     private double altura;
     private double peso;
     private boolean estaActivo = false;
@@ -19,7 +19,7 @@ public class Ficha {
     public Ficha(String ID, Cliente cliente, LocalDate fechaInicio, LocalDate ultimaAsistencia, boolean estaActivo) {
         this.ID = ID;
         this.cliente = cliente;
-        registroActividades = new ArrayList<>();
+        horarios = new ArrayList<>();
         this.fechaInicio = fechaInicio;
         this.ultimaAsistencia = ultimaAsistencia;
         this.estaActivo = estaActivo;
@@ -28,7 +28,6 @@ public class Ficha {
     public Ficha(String ID, Cliente cliente, String fechaInicio, String ultimaAsistencia, boolean estaActivo) {
         this(ID, cliente, Parser.toLocalDate(fechaInicio), Parser.toLocalDate(ultimaAsistencia), estaActivo);
     }
-
 
     public void setAltura(double altura) {
         this.altura = altura;
@@ -50,16 +49,16 @@ public class Ficha {
         return peso;
     }
 
-    public ArrayList<RegistroActividad> getRegistroActividades() {
-        return registroActividades;
-    }
-
-    public void registrarActividad(RegistroActividad registroActividad){
-        registroActividades.add(registroActividad);
-    }
-
     public String getID() {
         return ID;
+    }
+
+    public void registrarHorario(Horario horario) {
+        horarios.add(horario);
+    }
+
+    public ArrayList<Horario> getHorarios() {
+        return horarios;
     }
 
     public void iniciarSeguimiento(LocalDate fecha) {
@@ -88,7 +87,7 @@ public class Ficha {
     public String toString() {
         return "Ficha{" + "\n" +
                 "cliente=" + cliente + "\n" +
-                ", registroActividades=" + registroActividades + "\n" +
+                ", horarios=" + horarios + "\n" +
                 ", altura=" + altura + "\n" +
                 ", peso=" + peso + "\n" +
                 ", estaActivo=" + estaActivo + "\n" +
@@ -96,4 +95,18 @@ public class Ficha {
                 ", ultimaAsistencia=" + ultimaAsistencia + "\n" +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(obj.getClass() != this.getClass()) return false;
+        Ficha ficha = (Ficha) obj;
+        return this.ID.equals(ficha.ID) &&
+                this.cliente.equals(ficha.cliente) &&
+                this.fechaInicio.equals(ficha.fechaInicio) &&
+                this.ultimaAsistencia.equals(ficha.ultimaAsistencia) &&
+                this.estaActivo == ficha.estaActivo;
+    }
+
+
 }

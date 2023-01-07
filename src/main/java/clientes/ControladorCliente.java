@@ -18,10 +18,8 @@ public class ControladorCliente {
     public ControladorCliente() {this.controladorBD = ControladorBD.getInstance();}
 
     public void registrarCliente(Cliente cliente) throws Exception{
-
         ValidadorCedula validadorCedula = new ValidadorCedula(cliente.getCedula());
         validadorCedula.validar();
-        System.out.println("valio");
         String cedula = cliente.getCedula();
         String nombres = cliente.getNombres();
         String apellidos = cliente.getApellidos();

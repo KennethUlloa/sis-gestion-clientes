@@ -108,4 +108,20 @@ public class Cliente {
     public String getNombreCompleto() {
         return nombres + " " + apellidos;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(obj.getClass() != this.getClass()) return false;
+        Cliente cliente = (Cliente) obj;
+        return this.cedula.equals(cliente.cedula) &&
+                this.nombres.equals(cliente.nombres) &&
+                this.apellidos.equals(cliente.apellidos) &&
+                this.sexo == cliente.sexo &&
+                this.telefono.equals(cliente.telefono) &&
+                this.nombreContacto.equals(cliente.nombreContacto) &&
+                this.telefonoContacto.equals(cliente.telefonoContacto) &&
+                this.correoElectronico.equals(cliente.correoElectronico) &&
+                this.direccion.equals(cliente.direccion);
+    }
 }

@@ -8,6 +8,7 @@ import database.ControladorBD;
 import database.SQLTable;
 import database.exceptions.NoSuchColumn;
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,33 +22,38 @@ public class ControladorFicha {
     }
     public Ficha consultarFicha(String ID) throws SQLException, NoSuchColumn, ErrorCedula {
         //Consultar cliente
-        SQLTable result = controladorBD.ejecutarSentencia("select f.ID, f.cliente, f.peso, f.altura, f.fecha_inicio, f.ultima_asistencia, f.esta_activo, h.hora_inicio, h.hora_fin, h.dia, h.actividad, a.nombre, a.descripcion\n" +
-                "from ficha_cliente as f, horarios_actividades as h, actividades as a \n" +
-                "where f.ID=h.ficha AND h.actividad=a.id AND f.ID='"+ID+"';");
+        SQLTable result = controladorBD.ejecutarSentencia(String.format("select * from ficha_cliente where ID='%s'", ID));
+
         if(result.getRowCount() == 0) return null;
-        Cliente c = controladorCliente.consultarCliente((String) result.getValueAt(0,"cliente"));
+        Cliente cliente = controladorCliente.consultarCliente((String) result.getValueAt(0,"cliente"));
         //Agregar datos de constructor
-        Ficha ficha = new Ficha((String) result.getValueAt(0,"ID"), c, (String) result.getValueAt(0,"fecha_inicio"),
+        Ficha ficha = new Ficha(
+                (String) result.getValueAt(0,"ID"),
+                cliente,
+                (String) result.getValueAt(0,"fecha_inicio"),
                 (String) result.getValueAt(0, "ultima_asistencia"),
                 ((Integer)result.getValueAt(0,"esta_activo") == 1));
         ficha.setAltura((Double) result.getValueAt(0, "altura"));
         ficha.setPeso((Double) result.getValueAt(0, "peso"));
 
         //Consultar Actividades
+        result = controladorBD.ejecutarSentencia(String.format(
+                "select h.hora_inicio, h.hora_fin, h.dia, h.actividad, a.nombre, a.descripcion " +
+                        "from horarios_actividades as h, actividades as a " +
+                        "where h.actividad=a.ID and h.ficha='%s'", ficha.getID()));
         for(int i = 0; i < result.getRowCount(); i++){
-            RegistroActividad registroActividad = new RegistroActividad(
-                    new Actividad(
-                            (String) result.getValueAt(i, "actividad"),
-                            (String) result.getValueAt(i, "nombre"),
-                            (String) result.getValueAt(0, "descripcion")
-                    ),
-                    new Horario(
-                            (String) result.getValueAt(i, "hora_inicio"),
-                            (String) result.getValueAt(i, "hora_fin")
-                    ),
-                    (Integer) result.getValueAt(i, "dia")
+
+            Horario horario = new Horario(
+                (String) result.getValueAt(i, "hora_inicio"),
+                (String) result.getValueAt(i, "hora_fin"),
+                new Actividad(
+                    (String) result.getValueAt(i, "actividad"),
+                    (String) result.getValueAt(i, "nombre"),
+                    (String) result.getValueAt(0, "descripcion")
+                ),
+                (Integer) result.getValueAt(0, "dia")
             );
-            ficha.registrarActividad(registroActividad);
+            ficha.registrarHorario(horario);
         }
 
         return ficha;
@@ -65,22 +71,38 @@ public class ControladorFicha {
                 "esta_activo=" + (ficha.estaActivo()? 1 : 0) + "\n" +
                 "where ID='F1';");
 
-        for(RegistroActividad registroActividad: ficha.getRegistroActividades()){
+        for(Horario horario: ficha.getHorarios()){
             sentencias.add(String.format("UPDATE horarios_actividades SET hora_inicio='%s'," +
                     "hora_fin='%s', dia=%d WHERE ficha='%s' and actividad='%s'",
-                    Parser.toString(registroActividad.getHorario().getInicio()),
-                    Parser.toString(registroActividad.getHorario().getFin()),
-                    registroActividad.getDia(),
+                    Parser.toString(horario.getInicio()),
+                    Parser.toString(horario.getFin()),
+                    horario.getDia(),
                     ficha.getID(),
-                    registroActividad.getActividad().getID()
+                    horario.getActividad().getID()
                     ));
             sentencias.add(String.format("UPDATE actividades SET nombre='%s', descripcion='%s' WHERE id='%s'",
-                    registroActividad.getActividad().getNombre(),
-                    registroActividad.getActividad().getDescripcion(),
-                    registroActividad.getActividad().getID()
+                    horario.getActividad().getNombre(),
+                    horario.getActividad().getDescripcion(),
+                    horario.getActividad().getID()
                     ));
         }
 
         controladorBD.ejecutarSentencias(sentencias.toArray(new String[0]));
+    }
+
+    public void registrarFicha(Ficha ficha) throws SQLException {
+        ArrayList<String> consultas = new ArrayList<>();
+        consultas.add(String.format("INSERT INTO ficha_cliente VALUES('%s','%s','%s','%s','%s','%s','%d')",
+                ficha.getID(), ficha.getCliente().getCedula(), ficha.getPeso(), ficha.getAltura(),
+                Parser.toString(ficha.getFechaInicio()), Parser.toString(ficha.getUltimaAsistencia()),
+                (ficha.estaActivo())? 1:0
+                ));
+        for(Horario horario : ficha.getHorarios()) {
+            consultas.add(String.format("INSERT INTO horarios_actividades VALUES('%s','%s','%s','%s','%d')",
+                    Parser.toString(horario.getInicio()), Parser.toString(horario.getFin()),
+                    horario.getActividad().getID(), ficha.getID(), horario.getDia()
+                    ));
+        }
+        controladorBD.ejecutarSentencias(consultas.toArray(new String[0]));
     }
 }
