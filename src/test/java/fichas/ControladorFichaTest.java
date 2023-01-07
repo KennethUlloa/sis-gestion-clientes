@@ -55,13 +55,13 @@ public class ControladorFichaTest {
     }
 
     @Test
-    public void given_ficha_when_query_then_ok() throws SQLException, NoSuchColumn, ErrorCedula {
+    public void given_ficha_when_query_then_ok() throws Exception {
         Ficha f = controladorFicha.consultarFicha(ficha.getID());
         assertEquals(ficha, f);
     }
 
     @Test
-    public void given_record_when_update_then_ok() throws SQLException, NoSuchColumn, ErrorCedula {
+    public void given_record_when_update_then_ok() throws Exception {
         ficha.setPeso(60);
         controladorFicha.actualizarFicha(ficha);
         Ficha fichaConsultada = controladorFicha.consultarFicha(ficha.getID());

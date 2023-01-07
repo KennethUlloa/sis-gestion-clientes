@@ -34,7 +34,7 @@ public class ControladorClienteTest {
     }
 
     @Test
-    public void given_client_cedula_when_consult_client_then_ok() throws ErrorCedula {
+    public void given_client_cedula_when_consult_client_then_ok() throws Exception {
         try {
             controladorCliente.registrarCliente(cliente);
         } catch (Exception e) {}
