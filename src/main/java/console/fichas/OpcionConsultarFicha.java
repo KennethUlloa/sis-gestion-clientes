@@ -1,7 +1,10 @@
 package console.fichas;
 
+import clientes.Cliente;
+import clientes.ControladorCliente;
 import clientes.excepciones.ErrorCedula;
 import console.Opcion;
+import console.input.Input;
 import database.exceptions.NoSuchColumn;
 import fichas.ControladorFicha;
 import fichas.Ficha;
@@ -16,19 +19,16 @@ public class OpcionConsultarFicha extends Opcion {
 
     @Override
     public void ejecutar(Object... argumentos) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Identificador de ficha >> ");
-        String idFicha = scanner.next();
         try {
-            Ficha ficha = new ControladorFicha().consultarFicha(idFicha);
-            if(ficha != null){
-                System.out.println(ficha);
-            }else{
-                System.out.println("No existe la ficha");
+            Input input = new Input(Input.NEXT_LINE, new Scanner(System.in));
+            ControladorCliente controladorCliente = new ControladorCliente();
+            ControladorFicha controladorFicha = new ControladorFicha();
+            Cliente cliente = controladorCliente.consultarCliente(input.get("* Ingresa la cédula del cliente >> ", 1));
+            Ficha ficha = controladorFicha.consultarFicha("F"+cliente.getCedula());
+            if(ficha == null) {
+                throw new Exception("No se encontró la ficha");
             }
-
-        } catch (SQLException | NoSuchColumn e) {
-            System.out.println("No se pudo realizar la acción solicitada");
+            System.out.println(ficha);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
