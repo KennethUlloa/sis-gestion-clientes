@@ -18,9 +18,11 @@ public class OpcionActualizarDatosCliente extends Opcion {
     @Override
     public void ejecutar(Object... argumentos) {
         Input input = new Input(Input.NEXT_LINE, new Scanner(System.in));
-        String cedula = input.get("* Número de cédula del cliente >> ", new ValidadorCedula(""), new NoActionCaster<>());
-        ControladorCliente controladorCliente = new ControladorCliente();
+
         try {
+            String cedula = input.get("* Número de cédula del cliente >> ", new ValidadorCedula(""), new NoActionCaster<>());
+            System.out.println("Input");
+            ControladorCliente controladorCliente = new ControladorCliente();
             Cliente cliente = controladorCliente.consultarCliente(cedula);
             if(cliente == null) {
                 System.out.println("Cliente no encontrado");
@@ -29,7 +31,7 @@ public class OpcionActualizarDatosCliente extends Opcion {
             MenuActualizacionDatosCliente menu = new MenuActualizacionDatosCliente();
             menu.setArguments(cliente);
             menu.mostrarSeleccion();
-        } catch (ErrorCedula e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 

@@ -15,7 +15,7 @@ public class OpcionCambiarNumero extends Opcion {
         //TODO: Cambiar número del cliente
         ActualizarCampoCliente actualizarCampoCliente = new ActualizarCampoCliente() {
             @Override
-            public void actualizacionEspecifica(Cliente cliente, Input input) {
+            public void actualizacionEspecifica(Cliente cliente, Input input) throws Exception {
                 System.out.println("* Teléfono actual: " + cliente.getTelefono());
                 String nuevo = input.get("* Ingresa el nuevo teléfono >> ");
                 cliente.setTelefono(nuevo);

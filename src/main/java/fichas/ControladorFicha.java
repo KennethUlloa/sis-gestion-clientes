@@ -20,7 +20,7 @@ public class ControladorFicha {
         controladorBD = ControladorBD.getInstance();
         controladorCliente = new ControladorCliente();
     }
-    public Ficha consultarFicha(String ID) throws SQLException, NoSuchColumn, ErrorCedula {
+    public Ficha consultarFicha(String ID) throws Exception {
         //Consultar cliente
         SQLTable result = controladorBD.ejecutarSentencia(String.format("select * from ficha_cliente where ID='%s'", ID));
 

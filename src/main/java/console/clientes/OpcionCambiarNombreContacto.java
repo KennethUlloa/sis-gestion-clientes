@@ -21,7 +21,7 @@ public class OpcionCambiarNombreContacto extends Opcion {
         //TODO: Cambiar nombre de contacto
         ActualizarCampoCliente actualizarCampoCliente = new ActualizarCampoCliente() {
             @Override
-            public void actualizacionEspecifica(Cliente cliente, Input input) {
+            public void actualizacionEspecifica(Cliente cliente, Input input) throws Exception {
                 System.out.println("* Nombre de contacto actual: " + cliente.getNombreContacto());
                 String nuevo = input.get("* Ingresa el nuevo nombre de contacto >> ");
                 cliente.setNombreContacto(nuevo);

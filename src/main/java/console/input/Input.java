@@ -3,7 +3,6 @@ package console.input;
 import validacion.Validador;
 import validacion.ValidadorInactivo;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 public class Input {
@@ -25,10 +24,11 @@ public class Input {
         this(NEXT, scanner);
     }
 
-    public <T> T get(String prompt, Validador<T> validador, CustomCaster<T, String> caster, int attempts) {
+    public <T> T get(String prompt, Validador<T> validador, CustomCaster<T, String> caster, int attempts) throws Exception {
         T parameter = null;
         int posibleAttempts = Math.max(1, Math.min(100, attempts));
         int currentAttempt = 0;
+        Exception exception = null;
         while (currentAttempt < posibleAttempts) {
             System.out.print(prompt);
             String op = getInput();
@@ -36,15 +36,22 @@ public class Input {
                 parameter = caster.cast(op);
                 validador.validar(parameter);
                 currentAttempt = posibleAttempts;
+                exception = null;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 currentAttempt += 1;
+                exception = e;
             }
         }
+
+        if(exception != null) {
+            throw exception;
+        }
+
         return parameter;
     }
 
-    public <T> T get(String prompt, Validador<T> validador, CustomCaster<T, String> caster) {
+    public <T> T get(String prompt, Validador<T> validador, CustomCaster<T, String> caster) throws Exception {
         return get(prompt, validador, caster, MAX_INTENTS);
     }
 
@@ -60,16 +67,20 @@ public class Input {
         this.mode = (mode == NEXT_LINE)? NEXT_LINE : NEXT;
     }
 
-    public String get() {
-        return get("", new ValidadorInactivo<String>(), new NoActionCaster<String>(), MAX_INTENTS);
+    public String get() throws Exception {
+        return get("", new ValidadorInactivo<>(), new NoActionCaster<>(), MAX_INTENTS);
     }
 
-    public String get(String prompt) {
-        return get(prompt, new ValidadorInactivo<String>(), new NoActionCaster<String>(), MAX_INTENTS);
+    public String get(String prompt) throws Exception {
+        return get(prompt, new ValidadorInactivo<>(), new NoActionCaster<>(), MAX_INTENTS);
     }
 
-    public String get(int mode) {
+    public String get(int mode) throws Exception {
         setMode(mode);
-        return get("", new ValidadorInactivo<String>(), new NoActionCaster<String>(), MAX_INTENTS);
+        return get("", new ValidadorInactivo<>(), new NoActionCaster<>(), MAX_INTENTS);
+    }
+
+    public String get(String prompt, int attempts) throws Exception {
+        return get(prompt, new ValidadorInactivo<>(), new NoActionCaster<>(), attempts);
     }
 }

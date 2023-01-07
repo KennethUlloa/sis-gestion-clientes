@@ -20,7 +20,7 @@ public class OpcionCambiarDireccion extends Opcion {
         //TODO: Cambiar dirección
         ActualizarCampoCliente actualizarCampoCliente = new ActualizarCampoCliente() {
             @Override
-            public void actualizacionEspecifica(Cliente cliente, Input input) {
+            public void actualizacionEspecifica(Cliente cliente, Input input) throws Exception {
                 System.out.println("* Dirección actual: " + cliente.getDireccion());
                 String direccion = input.get("* Ingresa la nueva dirección >> ");
                 cliente.setDireccion(direccion);

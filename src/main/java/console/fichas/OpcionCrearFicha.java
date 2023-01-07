@@ -25,7 +25,7 @@ public class OpcionCrearFicha extends Opcion {
                 System.out.println("El cliente no existe");
                 return;
             }
-        } catch (ErrorCedula e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }

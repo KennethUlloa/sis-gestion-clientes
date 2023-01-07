@@ -41,11 +41,11 @@ public class ControladorCliente {
         }
     }
 
-    public Cliente consultarCliente(String cedula) throws ErrorCedula {
+    public Cliente consultarCliente(String cedula) throws Exception {
         new ValidadorCedula(cedula).validar();
         try{
             SQLTable resultado = controladorBD.ejecutarSentencia("select * from clientes where cedula="+cedula);
-            if(resultado.getRowCount() == 0) return null;
+            if(resultado.getRowCount() == 0) throw new Exception("No se encontró al cliente");
             String nombres = (String) resultado.getValueAt(0,"nombres");
             String apellidos = (String) resultado.getValueAt(0,"apellidos");
             String fecha = (String)resultado.getValueAt(0,"fecha_nacimiento");
@@ -58,8 +58,8 @@ public class ControladorCliente {
 
             return new Cliente(cedula,nombres,apellidos,fecha,sexo,telefono,nombreContacto,
                     telefonoContacto,correoElectronico,direccion);
-        }catch (Exception ex){
-            return null;
+        }catch (SQLException ex){
+            throw new Exception("No se pudo consultar al cliente");
         }
     }
 
@@ -100,9 +100,10 @@ public class ControladorCliente {
 
     public void eliminarCliente(String cedula) throws Exception {
         try{
-        controladorBD.ejecutarSentencia("delete from clientes where cedula="+cedula);
-        }catch (SQLException ex){
+            Cliente cliente = consultarCliente(cedula);
 
+            controladorBD.ejecutarSentencia("delete from clientes where cedula="+cedula);
+        }catch (SQLException ex){
             throw new Exception("El sistema no pudo eliminar al cliente");
         }
     }

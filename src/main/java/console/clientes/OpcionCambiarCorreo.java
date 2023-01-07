@@ -21,7 +21,7 @@ public class OpcionCambiarCorreo extends Opcion {
         //TODO: Verificar el correo ingresado
         ActualizarCampoCliente actualizarCampoCliente = new ActualizarCampoCliente() {
             @Override
-            public void actualizacionEspecifica(Cliente cliente, Input input) {
+            public void actualizacionEspecifica(Cliente cliente, Input input) throws Exception {
                 System.out.println("* Correo actual: " + cliente.getCorreoElectronico());
                 String correo = input.get("* Ingresa el nuevo correo >> ");
                 cliente.setCorreoElectronico(correo);

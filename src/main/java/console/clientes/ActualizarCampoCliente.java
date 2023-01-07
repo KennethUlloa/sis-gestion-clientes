@@ -22,10 +22,11 @@ public abstract class ActualizarCampoCliente {
             try {
                 String cedula = input.get("* Ingresa la cédula del cliente >> ", new ValidadorCedula(""), new NoActionCaster<String>(), 3);
                 cliente = controladorCliente.consultarCliente(cedula);
-            } catch (ErrorCedula e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
+        input.setMode(Input.NEXT_LINE);
         try{
             cliente = (cliente == null)? (Cliente) argumentos[0] : cliente;
             actualizacionEspecifica(cliente, input);
@@ -35,5 +36,5 @@ public abstract class ActualizarCampoCliente {
         }
     }
 
-    public abstract void actualizacionEspecifica(Cliente cliente, Input input);
+    public abstract void actualizacionEspecifica(Cliente cliente, Input input) throws Exception;
 }

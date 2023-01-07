@@ -29,7 +29,7 @@ public class OpcionConsultarFicha extends Opcion {
 
         } catch (SQLException | NoSuchColumn e) {
             System.out.println("No se pudo realizar la acción solicitada");
-        } catch (ErrorCedula e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
