@@ -26,9 +26,7 @@ public class Cliente {
         this.telefonoContacto = telefonoContacto;
         this.correoElectronico = correoElectronico;
         this.direccion = direccion;
-
     }
-
     public String getCedula() {
         return cedula;
     }

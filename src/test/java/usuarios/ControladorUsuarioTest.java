@@ -13,6 +13,8 @@ import static org.junit.Assert.*;
 public class ControladorUsuarioTest {
     private Usuario usuario;
     private ControladorBD controladorBD;
+    private ControladorUsuario controladorUsuario;
+
     @Before
     public void setUpTest() {
         usuario = new Usuario(
@@ -22,17 +24,21 @@ public class ControladorUsuarioTest {
         );
 
         controladorBD = ControladorBD.getInstance();
+        controladorUsuario = new ControladorUsuario();
     }
 
     @Test
     public void given_user_when_registration_then_ok() throws Exception {
-        ControladorUsuario controladorUsuario = new ControladorUsuario();
         controladorUsuario.registrarUsuario(usuario);
         ControladorBD controladorBD = ControladorBD.getInstance();
         SQLTable result = controladorBD.ejecutarSentencia("select * from usuarios where usuario='" + usuario.getUsuario() + "'");
         assertEquals(result.getValueAt(0, "usuario"), usuario.getUsuario());
         assertEquals(result.getValueAt(0, "contrasenia"), usuario.getContrasena());
         assertEquals(result.getValueAt(0, "rol"), usuario.getRol());
+    }
+    @Test(expected = Exception.class)
+    public void given_inexistent_username_when_authentication_then_error() throws Exception {
+        controladorUsuario.validarCredenciales("admin","1234");
     }
 
     @After

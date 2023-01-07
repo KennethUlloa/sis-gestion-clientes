@@ -37,7 +37,6 @@ public class ControladorCliente {
         try{
             controladorBD.ejecutarSentencia(sentencia);
         }catch (SQLException ex){
-
             throw new Exception("El sistema no pudo registrar al cliente");
         }
     }
@@ -79,23 +78,22 @@ public class ControladorCliente {
         String direccion = cliente.getDireccion();
 
         try{
-            String formato = "UPDATE clientes\n" +
-                    //"   SET cedula = '%s',\n" + NO SE ACTUALIZA EL ID JAMÁS!!!!
-                    "       nombres = '%s',\n" +
-                    "       apellidos = '%s',\n" +
-                    "       sexo = '%s',\n" +
-                    "       fecha_nacimiento = '%s',\n" +
-                    "       correo_electronico = '%s',\n" +
-                    "       telefono = '%s',\n" +
-                    "       nombre_contacto = '%s',\n" +
-                    "       telefono_contacto = '%s',\n" +
-                    "       direccion = '%s'\n" +
-                    " WHERE cedula = '%s';";
+            String formato = "UPDATE clientes " +
+                    "SET nombres = '%s'," +
+                    "apellidos = '%s'," +
+                    "sexo = '%s'," +
+                    "fecha_nacimiento = '%s'," +
+                    "correo_electronico = '%s'," +
+                    "telefono = '%s'," +
+                    "nombre_contacto = '%s'," +
+                    "telefono_contacto = '%s'," +
+                    "direccion = '%s'" +
+                    "WHERE cedula = '%s';";
 
-            String sentencia = String.format(formato, cedula, nombres, apellidos, sexo, fechaFormateada, correoElectronico, telefono, nombreContacto, telefonoContacto, direccion,cedula);
+            String sentencia = String.format(formato, nombres, apellidos, sexo, fechaFormateada, correoElectronico, telefono, nombreContacto, telefonoContacto, direccion,cedula);
             controladorBD.ejecutarSentencia(sentencia);
         }catch (Exception ex){
-
+            System.out.println(ex.getMessage());
             throw new Exception("El sistema no pudo actualizar el cliente");
         }
 
