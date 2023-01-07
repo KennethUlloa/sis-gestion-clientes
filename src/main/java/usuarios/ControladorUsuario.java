@@ -39,18 +39,26 @@ public class ControladorUsuario {
         try {
             result = controladorBD.ejecutarSentencia("select * from usuarios where usuario='"+ usuario +"'");
         } catch (SQLException e) {
-            throw new Exception("No se pudo validar el usuario");
+            throw new Exception("No se pudo validar el  usuario");
         }
 
         if (result == null || result.getRowCount() == 0 ) throw new Exception("No existe un usuario: " + usuario);
-
+        String rolString = (String) result.getValueAt(0, "rol");
+        Rol rol = Rol.valueOf(rolString);
         Usuario usuario1 = new Usuario(
                 (String) result.getValueAt(0, "usuario"),
                 (String) result.getValueAt(0, "contrasenia"),
-                (String) result.getValueAt(0, "rol")
+                rol
         );
 
         if(!usuario1.getContrasena().equals(contrasenia)) throw new Exception("Contraseña incorrecta");
+
         return usuario1;
     }
+
+    public void eliminarUsuario(String nombreUsuario) {
+        //Todo:
+
+    }
+
 }

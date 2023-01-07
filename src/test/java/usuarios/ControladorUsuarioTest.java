@@ -20,7 +20,7 @@ public class ControladorUsuarioTest {
         usuario = new Usuario(
                 "test",
                 "1234",
-                "Admin"
+                Rol.ADMINISTRADOR
         );
 
         controladorBD = ControladorBD.getInstance();
@@ -42,7 +42,7 @@ public class ControladorUsuarioTest {
     }
 
     @After
-    public void after() {
+    public void after_registration_delete_users_then_ok() {
         try {
             controladorBD.ejecutarSentencia("delete from usuarios where usuario='" + usuario.getUsuario() + "'");
         } catch (SQLException e) {
