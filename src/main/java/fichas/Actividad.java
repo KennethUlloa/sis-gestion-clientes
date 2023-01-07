@@ -1,5 +1,7 @@
 package fichas;
 
+import clientes.Cliente;
+
 public class Actividad {
     private final String ID;
     private String nombre;
@@ -30,5 +32,15 @@ public class Actividad {
                 ", nombre='" + nombre + '\'' + "\n" +
                 ", descripcion='" + descripcion + '\'' + "\n" +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(obj.getClass() != this.getClass()) return false;
+        Actividad actividad = (Actividad) obj;
+        return this.ID.equals(actividad.ID) &&
+                this.nombre.equals(actividad.nombre) &&
+                this.descripcion.equals(actividad.descripcion);
     }
 }

@@ -1,5 +1,6 @@
 package fichas;
 
+import clientes.Cliente;
 import clientes.Parser;
 
 import java.time.LocalTime;
@@ -42,5 +43,16 @@ public class Horario {
                 ", actividad=" + actividad +
                 ", dia=" + dia +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(obj.getClass() != this.getClass()) return false;
+        Horario horario = (Horario) obj;
+        return this.inicio.equals(horario.inicio) &&
+                this.fin.equals(horario.fin) &&
+                this.actividad.equals(horario.actividad) &&
+                this.dia == horario.dia;
     }
 }
