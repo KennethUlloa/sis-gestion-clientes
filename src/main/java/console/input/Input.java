@@ -25,26 +25,27 @@ public class Input {
         this(NEXT, scanner);
     }
 
-    public <T> T get(String prompt, Validador<T> validador, CustomCaster<T, String> caster, boolean multiple) {
-        boolean continue_ = true;
+    public <T> T get(String prompt, Validador<T> validador, CustomCaster<T, String> caster, int attempts) {
         T parameter = null;
-        int currentTry = 1;
-        do {
+        int posibleAttempts = Math.max(1, Math.min(100, attempts));
+        int currentAttempt = 0;
+        while (currentAttempt < posibleAttempts) {
             System.out.print(prompt);
             String op = getInput();
             try {
                 parameter = caster.cast(op);
                 validador.validar(parameter);
-                if(!multiple || currentTry >= MAX_INTENTS) {
-                    break;
-                }
-                continue_ = false;
+                currentAttempt = posibleAttempts;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                currentTry += 1;
+                currentAttempt += 1;
             }
-        }while(continue_);
+        }
         return parameter;
+    }
+
+    public <T> T get(String prompt, Validador<T> validador, CustomCaster<T, String> caster) {
+        return get(prompt, validador, caster, MAX_INTENTS);
     }
 
     public void setMaxChances(int numChances) {
@@ -60,15 +61,15 @@ public class Input {
     }
 
     public String get() {
-        return get("", new ValidadorInactivo<String>(), new NoActionCaster<String>(), false);
+        return get("", new ValidadorInactivo<String>(), new NoActionCaster<String>(), MAX_INTENTS);
     }
 
     public String get(String prompt) {
-        return get(prompt, new ValidadorInactivo<String>(), new NoActionCaster<String>(), false);
+        return get(prompt, new ValidadorInactivo<String>(), new NoActionCaster<String>(), MAX_INTENTS);
     }
 
     public String get(int mode) {
         setMode(mode);
-        return get("", new ValidadorInactivo<String>(), new NoActionCaster<String>(), false);
+        return get("", new ValidadorInactivo<String>(), new NoActionCaster<String>(), MAX_INTENTS);
     }
 }

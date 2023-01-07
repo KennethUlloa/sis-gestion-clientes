@@ -20,7 +20,7 @@ public abstract class ActualizarCampoCliente {
         ControladorCliente controladorCliente = new ControladorCliente();
         if(argumentos.length == 0 || !(argumentos[0] instanceof Cliente)) {
             try {
-                String cedula = input.get("* Ingresa la cédula del cliente >> ", new ValidadorCedula(""), new NoActionCaster<String>(), true);
+                String cedula = input.get("* Ingresa la cédula del cliente >> ", new ValidadorCedula(""), new NoActionCaster<String>(), 3);
                 cliente = controladorCliente.consultarCliente(cedula);
             } catch (ErrorCedula e) {
                 System.out.println(e.getMessage());

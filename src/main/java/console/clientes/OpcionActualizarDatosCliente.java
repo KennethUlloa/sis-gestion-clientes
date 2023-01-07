@@ -5,6 +5,8 @@ import clientes.ControladorCliente;
 import clientes.excepciones.ErrorCedula;
 import console.Opcion;
 import console.input.Input;
+import console.input.NoActionCaster;
+import validacion.ValidadorCedula;
 
 import java.util.Scanner;
 
@@ -16,7 +18,7 @@ public class OpcionActualizarDatosCliente extends Opcion {
     @Override
     public void ejecutar(Object... argumentos) {
         Input input = new Input(Input.NEXT_LINE, new Scanner(System.in));
-        String cedula = input.get("* Número de cédula del cliente >> ");
+        String cedula = input.get("* Número de cédula del cliente >> ", new ValidadorCedula(""), new NoActionCaster<>());
         ControladorCliente controladorCliente = new ControladorCliente();
         try {
             Cliente cliente = controladorCliente.consultarCliente(cedula);

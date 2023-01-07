@@ -18,7 +18,7 @@ public class OpcionRegistrarCliente extends Opcion {
     @Override
     public void ejecutar(Object... argumentos) {
         Input input = new Input(Input.NEXT_LINE, new Scanner(System.in));
-        String cedula = input.get("* Número de cédula >> ", new ValidadorCedula(""), new NoActionCaster<String>(), true);
+        String cedula = input.get("* Número de cédula >> ", new ValidadorCedula(""), new NoActionCaster<String>());
         String nombres = input.get("* Nombres >> ");
         String apellidos = input.get("* Apellidos >> ");
         String fechaNacimiento = input.get("* Fecha de nacimiento (dd-mm-aaaa) >> ");
