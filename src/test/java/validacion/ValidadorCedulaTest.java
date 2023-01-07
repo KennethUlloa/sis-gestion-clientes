@@ -9,30 +9,21 @@ import static org.junit.Assert.*;
 public class ValidadorCedulaTest {
 
     @Test(expected = ErrorCedula.class)
-    public void given_new_client_when_not_valid_cedula_then_error() throws ErrorCedula {
-        Cliente c= new Cliente("1514","Angelo Alexandro",
-                "Abad Abarca","15-08-1997",
-                'M',"0963870957",
-                "Diana Abad","0964255255",
-                "abad14@gmail.com","Av.Maldonado");
-        ValidadorCedula val = new ValidadorCedula(c.getCedula());
+    public void given_string_when_not_valid_cedula_then_error() throws ErrorCedula {
+        ValidadorCedula val = new ValidadorCedula("1514");
+        val.validar();
+    }
+
+    @Test(expected = ErrorCedula.class)
+    public void given_string_when_not_numeric_then_error() throws ErrorCedula {
+        ValidadorCedula val = new ValidadorCedula("c125ad#");
         val.validar();
     }
 
     @Test
     public void given_new_client_when_valid_cedula_then_ok() throws ErrorCedula {
-        Cliente c= new Cliente("172635479","Angelo Alexandro",
-                "Abad Abarca","15-08-1997",
-                'M',"0963870957",
-                "Diana Abad","0964255255",
-                "abad14@gmail.com","Av.Maldonado");
-        ValidadorCedula val=new ValidadorCedula(c.getCedula());
+        ValidadorCedula val=new ValidadorCedula("2256512712");
         val.validar();
-    }
-    @Test(expected = ErrorCedula.class)
-    public void algoritmo_cedula() throws ErrorCedula {
-        ValidadorCedula validadorCedula = new ValidadorCedula("172635479");
-        validadorCedula.validar();
     }
 
 }
