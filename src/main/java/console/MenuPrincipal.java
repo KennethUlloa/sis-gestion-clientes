@@ -4,12 +4,15 @@ import console.autenticacion.OpcionModuloUsuarios;
 import console.clientes.OpcionModuloClientes;
 import console.fichas.OpcionModuloFichas;
 import global.GLOBAL;
+import usuarios.Rol;
 
 public class MenuPrincipal extends Menu {
 
     public MenuPrincipal() {
         super("MENU PRINCIPAL");
-        agregarOpcion(new OpcionModuloUsuarios());
+        if (GLOBAL.getUsuarioLoggeado().getRol().equals(Rol.ADMINISTRADOR.name())){
+            agregarOpcion(new OpcionModuloUsuarios());
+        }
         agregarOpcion(new OpcionModuloClientes());
         agregarOpcion(new OpcionModuloFichas());
         agregarOpcion(new OpcionSalir(this));

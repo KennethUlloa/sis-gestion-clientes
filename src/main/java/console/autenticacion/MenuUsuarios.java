@@ -8,15 +8,15 @@ import usuarios.Rol;
 public class MenuUsuarios extends Menu {
     public MenuUsuarios() {
         super("MODULO DE REGISTRO DE USUARIOS");
-        if (GLOBAL.getUsuarioLoggeado().getRol().equals(Rol.ADMINISTRADOR.name())) {
+        //if (GLOBAL.getUsuarioLoggeado().getRol().equals(Rol.ADMINISTRADOR.name())) {
             agregarOpcion(new OpcionCrearUsuario());
             agregarOpcion(new OpcionEliminarUsuario());
             agregarOpcion(new OpcionModificarUsuario());
             agregarOpcion(new OpcionRegresar(this));
-        }else {
-            System.out.println("No tiene permisos de ADMINISTRADOR para ejecutar estas opciones");
-            agregarOpcion(new OpcionRegresar(this));
-        }
+        //}else {
+        //    System.out.println("No tiene permisos de ADMINISTRADOR para ejecutar estas opciones");
+        //    agregarOpcion(new OpcionRegresar(this));
+        //}
     }
 
     @Override

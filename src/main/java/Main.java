@@ -6,7 +6,7 @@ import usuarios.ControladorUsuario;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        MenuPrincipal menuPrincipal = new MenuPrincipal();
+
         ControladorUsuario controladorUsuario = new ControladorUsuario();
         if (!controladorUsuario.verificarExistenciaUsuario()){
             System.out.println("No existen usuarios registrados, por favor, registre uno");
@@ -15,7 +15,7 @@ public class Main {
         do{
             new OpcionIngresarUsuario().ejecutar();
         }while (!GLOBAL.existeUsuarioRegistrado());
-
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
         menuPrincipal.mostrarSeleccion();
     }
 }

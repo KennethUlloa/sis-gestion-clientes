@@ -4,6 +4,8 @@ package console.autenticacion;
 import clientes.ControladorCliente;
 import console.Opcion;
 import console.input.Input;
+import database.ControladorBD;
+import database.SQLTable;
 import global.GLOBAL;
 import usuarios.ControladorUsuario;
 import usuarios.Usuario;
@@ -21,7 +23,11 @@ public class OpcionEliminarUsuario extends Opcion {
         Input input = new Input(new Scanner(System.in));
         ControladorUsuario controladorUsuario = new ControladorUsuario();
         try {
-            controladorUsuario.eliminarUsuario(input.get("* Ingresa el nombre del usuario a eliminar>> ", 0));
+            System.out.println(
+                    ControladorBD.getInstance().ejecutarSentencia("select usuario from usuarios")
+            );
+            String usuario = input.get("* Ingresa el nombre del usuario a eliminar>> ", 0);
+            controladorUsuario.eliminarUsuario(usuario);
             System.out.println("Usuario eliminado exitosamente!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
