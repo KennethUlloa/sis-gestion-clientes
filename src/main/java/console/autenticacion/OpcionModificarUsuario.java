@@ -6,17 +6,18 @@ import usuarios.ControladorUsuario;
 import usuarios.Rol;
 import usuarios.Usuario;
 
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class OpcionModificarUsuario extends Opcion {
     public OpcionModificarUsuario() {
-        super("Modificar permiso de usuario");
+        super("Modificar rol usuario");
     }
 
     @Override
     public void ejecutar(Object... argumentos) {
-        //TODO: modificar permiso usuario
+
         Scanner scanner = new Scanner(System.in);
         ControladorUsuario controladorUsuario = new ControladorUsuario();
         Input input = new Input(new Scanner(System.in));

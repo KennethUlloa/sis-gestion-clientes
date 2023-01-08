@@ -2,7 +2,10 @@ package usuarios;
 
 import database.ControladorBD;
 import database.SQLTable;
+import global.GLOBAL;
+
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class ControladorUsuario {
 

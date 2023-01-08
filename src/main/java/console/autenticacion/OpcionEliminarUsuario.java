@@ -4,6 +4,7 @@ package console.autenticacion;
 import clientes.ControladorCliente;
 import console.Opcion;
 import console.input.Input;
+import global.GLOBAL;
 import usuarios.ControladorUsuario;
 import usuarios.Usuario;
 
