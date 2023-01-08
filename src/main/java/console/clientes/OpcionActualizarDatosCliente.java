@@ -21,7 +21,6 @@ public class OpcionActualizarDatosCliente extends Opcion {
 
         try {
             String cedula = input.get("* Número de cédula del cliente >> ", new ValidadorCedula(""), new NoActionCaster<>());
-            System.out.println("Input");
             ControladorCliente controladorCliente = new ControladorCliente();
             Cliente cliente = controladorCliente.consultarCliente(cedula);
             if(cliente == null) {

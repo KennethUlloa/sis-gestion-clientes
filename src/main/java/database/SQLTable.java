@@ -87,7 +87,7 @@ public class SQLTable {
 
         for(Object[] row : rows){
             for(String key : columnIndex.keySet()){
-                output += String.format(format, ellipsis((String) row[columnIndex.get(key)]));
+                output += String.format(format, ellipsis( String.valueOf(row[columnIndex.get(key)])));
             }
             output += "┃\n";
         }
