@@ -1,21 +1,23 @@
 package usuarios;
 
 public class Usuario {
-    String usuario;
-    String contrasena;
-    String rol;
+    private String usuario;
+    private String contrasena;
+    private Rol rol;
 
-    public Usuario(String usuario, String contrasena, String rol) {
+    public Usuario(String usuario, String contrasena, Rol rol) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.rol = rol;
+
     }
 
     public String getUsuario() {
         return usuario;
     }
-    public String getRol(){
-        return rol;
+
+    public String getRol() {
+        return rol.name();
     }
 
     public String getContrasena() {
@@ -26,7 +28,7 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-    public void setRol(String rol){
+    public void setRol(Rol rol){
         this.rol = rol;
     }
 
@@ -40,6 +42,7 @@ public class Usuario {
         return "Usuario{" +
                 "   usuario='" + usuario + "'\n" +
                 "   contrasena='" + contrasena + "'\n" +
+                "   rol='" + rol.name() + "'\n" +
                 '}';
     }
 

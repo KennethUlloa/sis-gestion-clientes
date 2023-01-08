@@ -3,6 +3,7 @@ package usuarios;
 import database.ControladorBD;
 import database.SQLTable;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class ControladorUsuarioTest {
         usuario = new Usuario(
                 "test",
                 "1234",
-                "Admin"
+                Rol.ADMINISTRADOR
         );
 
         controladorBD = ControladorBD.getInstance();
@@ -30,7 +31,7 @@ public class ControladorUsuarioTest {
     @Test
     public void given_user_when_registration_then_ok() throws Exception {
         controladorUsuario.registrarUsuario(usuario);
-        ControladorBD controladorBD = ControladorBD.getInstance();
+        controladorBD = ControladorBD.getInstance();
         SQLTable result = controladorBD.ejecutarSentencia("select * from usuarios where usuario='" + usuario.getUsuario() + "'");
         assertEquals(result.getValueAt(0, "usuario"), usuario.getUsuario());
         assertEquals(result.getValueAt(0, "contrasenia"), usuario.getContrasena());
@@ -41,8 +42,20 @@ public class ControladorUsuarioTest {
         controladorUsuario.validarCredenciales("admin","1234");
     }
 
+    @Test
+    public  void given_user_when_deleted_then_ok() throws Exception {
+        controladorBD = ControladorBD.getInstance();
+        try {
+            controladorUsuario.registrarUsuario(usuario);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        controladorUsuario.eliminarUsuario(usuario.getUsuario());
+
+    }
+
     @After
-    public void after() {
+    public void after_registration_delete_users_then_ok() {
         try {
             controladorBD.ejecutarSentencia("delete from usuarios where usuario='" + usuario.getUsuario() + "'");
         } catch (SQLException e) {
