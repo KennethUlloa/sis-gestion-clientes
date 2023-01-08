@@ -3,14 +3,10 @@ package fichas;
 import clientes.Cliente;
 import clientes.ControladorCliente;
 import clientes.Parser;
-import clientes.excepciones.ErrorCedula;
 import database.ControladorBD;
 import database.SQLTable;
-import database.exceptions.NoSuchColumn;
 
-import java.awt.*;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ControladorFicha {

@@ -17,10 +17,10 @@ public class ControladorBDTest {
     public static void beforeClass() {
         ControladorBD controladorBD = ControladorBD.getInstance();
         try {
-            controladorBD.ejecutarSentencias("INSERT INTO Test VALUES('1','Dato 1','Dato 2')");
-            controladorBD.ejecutarSentencias("INSERT INTO Test VALUES('2','Dato 3','Dato 4')");
-            controladorBD.ejecutarSentencias("INSERT INTO Test VALUES('3','Dato 5','Dato 6')");
-            controladorBD.ejecutarSentencias("INSERT INTO Test VALUES('4','Dato 7','Dato 8')");
+            controladorBD.ejecutarSentencia("INSERT INTO Test VALUES('1','Dato 1','Dato 2')");
+            controladorBD.ejecutarSentencia("INSERT INTO Test VALUES('2','Dato 3','Dato 4')");
+            controladorBD.ejecutarSentencia("INSERT INTO Test VALUES('3','Dato 5','Dato 6')");
+            controladorBD.ejecutarSentencia("INSERT INTO Test VALUES('4','Dato 7','Dato 8')");
         } catch (SQLException ignored) {}
     }
 
