@@ -102,7 +102,7 @@ public class ControladorCliente {
         try{
             Cliente cliente = consultarCliente(cedula);
 
-            controladorBD.ejecutarSentencia("delete from clientes where cedula="+cedula);
+            controladorBD.ejecutarSentencia("delete from clientes where cedula="+cliente.getCedula());
         }catch (SQLException ex){
             throw new Exception("El sistema no pudo eliminar al cliente");
         }
