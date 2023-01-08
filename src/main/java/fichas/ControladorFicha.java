@@ -28,7 +28,7 @@ public class ControladorFicha {
                 cliente,
                 (String) result.getValueAt(0,"fecha_inicio"),
                 (String) result.getValueAt(0, "ultima_asistencia"),
-                ((Integer)result.getValueAt(0,"esta_activo") == 1));
+                ((Integer)result.getValueAt(0,"esta_activo") > 0));
         ficha.setAltura((Double) result.getValueAt(0, "altura"));
         ficha.setPeso((Double) result.getValueAt(0, "peso"));
 
@@ -65,7 +65,7 @@ public class ControladorFicha {
                 "fecha_inicio='" + Parser.toString(ficha.getFechaInicio()) + "',\n" +
                 "ultima_asistencia='" + Parser.toString(ficha.getUltimaAsistencia()) + "',\n" +
                 "esta_activo=" + (ficha.estaActivo()? 1 : 0) + "\n" +
-                "where ID='F1';");
+                "where ID='" + ficha.getID() + "'");
 
         for(Horario horario: ficha.getHorarios()){
 //            sentencias.add(String.format("UPDATE horarios_actividades SET hora_inicio='%s'," +
@@ -138,6 +138,13 @@ public class ControladorFicha {
                 horario.getActividad().getID()
         ));
         controladorBD.ejecutarSentencias(sentencias.toArray(new String[0]));
+    }
+
+    public Ficha consultarFichaPorCliente(String cedula) throws Exception {
+        String sentencia = String.format("select * from ficha_cliente where cliente='%s'", cedula);
+        SQLTable result = controladorBD.ejecutarSentencia(sentencia);
+        if (result.getRowCount() == 0) return null;
+        return consultarFicha((String) result.getValueAt(0, "ID"));
 
     }
 }

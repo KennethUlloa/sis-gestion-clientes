@@ -22,11 +22,6 @@ public class OpcionRegistrarHorario extends Opcion {
         super("Registrar horario");
     }
 
-    public static void main(String[] args) {
-        new OpcionRegistrarHorario().ejecutar();
-
-    }
-
     @Override
     public void ejecutar(Object... argumentos) {
         try {

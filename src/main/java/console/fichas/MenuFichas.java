@@ -10,6 +10,7 @@ public class MenuFichas extends Menu {
         agregarOpcion(new OpcionConsultarFicha(this));
         agregarOpcion(new OpcionCrearFicha());
         agregarOpcion(new OpcionRegistrarHorario());
+        agregarOpcion(new OpcionFinalizarSeguimiento());
         agregarOpcion(new OpcionRegresar(this));
     }
 }

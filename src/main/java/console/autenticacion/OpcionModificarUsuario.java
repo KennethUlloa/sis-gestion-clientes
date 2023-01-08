@@ -33,10 +33,7 @@ public class OpcionModificarUsuario extends Opcion {
         try {
             Validador<Integer> rango = new Validador<Integer>() {
                 @Override
-                public void validar() throws Exception {
-
-                }
-
+                public void validar() throws Exception {}
                 @Override
                 public void validar(Integer argument) throws Exception {
                     int length = Rol.values().length;
