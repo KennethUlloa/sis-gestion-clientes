@@ -3,7 +3,7 @@ package console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Menu {
+public class Menu {
     private final String titulo;
     private ArrayList<Opcion> opciones;
     private boolean repetir = true;
@@ -13,14 +13,23 @@ public abstract class Menu {
         this.titulo = titulo;
         opciones = new ArrayList<Opcion>();
     }
-
     public void mostrarOpciones() {
-        System.out.println("====== " + titulo + " ======");
+        printTitle();
         antesDeOpciones();
         for(int i = 0; i < opciones.size() ; i++) {
-            System.out.println("    " + (i+1) + ") " + opciones.get(i));
+            if(i < opciones.size() -1)
+                System.out.println("├────(" + (i+1) + ") " + opciones.get(i));
+            else
+                System.out.println("└────(" + (i+1) + ") " + opciones.get(i));
         }
         despuesDeOpciones();
+    }
+
+    public void printTitle() {
+        int padding = 16;
+        System.out.printf("╔%s╗\n", Console.repeat("═", titulo.length() + 2*padding + 1));
+        System.out.printf("║%s║\n", Console.repeat(" ", padding) + titulo + Console.repeat(" ", padding));
+        System.out.printf("╚%s╝\n", Console.repeat("═", titulo.length() + 2*padding + 1));
     }
 
     public void setArguments(Object... arguments) {
@@ -53,7 +62,6 @@ public abstract class Menu {
             if(validarOpcion(op)){
                 obtenerOpcion(op - 1).ejecutar(arguments);
             }
-
         };
     }
 

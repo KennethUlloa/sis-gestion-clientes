@@ -71,24 +71,25 @@ public class SQLTable {
             return "No rows selected";
         }
 
-        String format = "| %-30s";
+        String format = "┃ %-30s";
         String output = "";
-        String separador = "+";
+        String separador = "╋";
 
         for(int i = 0 ; i < getColumnCount() ; i++){
-            separador += "-------------------------------+";
+            separador +=   "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋";
+            //separador += "-------------------------------+";
         }
         output += separador +"\n";
         for(String name : columnIndex.keySet()){
-            output += String.format(format, name);
+            output += String.format(format, ellipsis(name));
         }
-        output += "|\n"+separador+"\n";
+        output += "┃\n"+separador+"\n";
 
         for(Object[] row : rows){
             for(String key : columnIndex.keySet()){
-                output += String.format(format, row[columnIndex.get(key)]);
+                output += String.format(format, ellipsis((String) row[columnIndex.get(key)]));
             }
-            output += "|\n";
+            output += "┃\n";
         }
         output += separador;
 
@@ -114,5 +115,12 @@ public class SQLTable {
         }
 
         return map;
+    }
+
+    private String ellipsis(String data) {
+        if(data.length() >= 30) {
+            return data.substring(0,25) + "...";
+        }
+        return data;
     }
 }

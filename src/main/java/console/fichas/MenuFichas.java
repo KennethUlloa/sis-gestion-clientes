@@ -7,8 +7,9 @@ import console.OpcionRegresar;
 public class MenuFichas extends Menu {
     public MenuFichas() {
         super("MENÚ FICHAS");
-        agregarOpcion(new OpcionConsultarFicha());
+        agregarOpcion(new OpcionConsultarFicha(this));
         agregarOpcion(new OpcionCrearFicha());
+        agregarOpcion(new OpcionRegistrarHorario());
         agregarOpcion(new OpcionRegresar(this));
     }
 }

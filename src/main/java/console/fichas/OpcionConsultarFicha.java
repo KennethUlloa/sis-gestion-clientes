@@ -3,6 +3,7 @@ package console.fichas;
 import clientes.Cliente;
 import clientes.ControladorCliente;
 import clientes.excepciones.ErrorCedula;
+import console.Menu;
 import console.Opcion;
 import console.input.Input;
 import database.exceptions.NoSuchColumn;
@@ -15,6 +16,9 @@ import java.util.Scanner;
 public class OpcionConsultarFicha extends Opcion {
     public OpcionConsultarFicha() {
         super("Consultar Ficha");
+    }
+    public OpcionConsultarFicha(Menu menu) {
+        super("Consultar Ficha", menu);
     }
 
     @Override
