@@ -1,5 +1,7 @@
 package database;
 
+import global.GLOBAL;
+
 import java.sql.*;
 
 public class ControladorBD {
@@ -11,7 +13,7 @@ public class ControladorBD {
 
     public static ControladorBD getInstance() {
         if (instance == null){
-            instance = new ControladorBD("jdbc:sqlite:database.db");
+            instance = new ControladorBD(GLOBAL.getStringDB());
         }
         return instance;
     }
