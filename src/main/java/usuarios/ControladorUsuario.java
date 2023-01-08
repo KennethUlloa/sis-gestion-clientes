@@ -90,6 +90,6 @@ public class ControladorUsuario {
     }
     public void consultarTablaUsuarios() throws SQLException {
         SQLTable result = controladorBD.ejecutarSentencia("select usuario,rol from usuarios");
-        System.out.println(result);
+        System.out.println("Tabla actual de usuarios del sistema \n" + result);
     }
 }
