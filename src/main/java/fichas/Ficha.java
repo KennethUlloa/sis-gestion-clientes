@@ -2,9 +2,13 @@ package fichas;
 
 import clientes.Cliente;
 import clientes.Parser;
+import console.TableDisplay;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Ficha {
     private String ID;
@@ -85,15 +89,58 @@ public class Ficha {
 
     @Override
     public String toString() {
-        return "Ficha{" + "\n" +
-                "cliente=" + cliente + "\n" +
-                ", horarios=" + horarios + "\n" +
-                ", altura=" + altura + "\n" +
-                ", peso=" + peso + "\n" +
-                ", estaActivo=" + estaActivo + "\n" +
-                ", fechaInicio=" + fechaInicio + "\n" +
-                ", ultimaAsistencia=" + ultimaAsistencia + "\n" +
-                '}';
+        TableDisplay<ArrayList<Horario>> horario = new TableDisplay<ArrayList<Horario>>() {
+            ArrayList<Horario> base;
+            String[] dias = new String[]{"LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO","DOMINGO"};
+            String[] columnNames = new String[]{"DIA","ACTIVIDAD","INICIO","FIN"};
+            @Override
+            public ArrayList<Horario> getBase() {
+                return base;
+            }
+
+            @Override
+            public void setBase(ArrayList<Horario> base) {
+                this.base = base;
+            }
+
+            @Override
+            public String getValueAt(int row, int column) {
+                Horario horario = base.get(row);
+                switch (column){
+                    case 0: return dias[horario.getDia()-1].toUpperCase();
+                    case 1: return horario.getActividad().getNombre();
+                    case 2: return Parser.toString(horario.getInicio());
+                    case 3: return Parser.toString(horario.getFin());
+                }
+                return "";
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 4;
+            }
+
+            @Override
+            public int getRowCount() {
+                return base.size();
+            }
+
+            @Override
+            public String getColumnName(int column) {
+                return columnNames[column];
+            }
+        };
+
+        horario.setBase(this.horarios);
+
+        return "FICHA\n" +
+                "CLIENTE: \n" + cliente + "\n" +
+                "HORARIOS: \n" + horario + "\n" +
+                "ALTURA: " + altura + "\n" +
+                "PESO: " + peso + "\n" +
+                "ACTIVO: " + (estaActivo? "SI" : "NO") + "\n" +
+                "FECHA DE INICIO: " + Parser.toString(fechaInicio) + "\n" +
+                "ULTIMA ASISTENCIA: " + Parser.toString(ultimaAsistencia) + "\n";
     }
 
     @Override

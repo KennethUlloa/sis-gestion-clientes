@@ -34,21 +34,22 @@ public class ControladorFicha {
 
         //Consultar Actividades
         result = controladorBD.ejecutarSentencia(String.format(
-                "select h.hora_inicio, h.hora_fin, h.dia, h.actividad, a.nombre, a.descripcion " +
+                "select h.id as horario, h.hora_inicio, h.hora_fin, h.dia, h.actividad, a.nombre, a.descripcion " +
                         "from horarios_actividades as h, actividades as a " +
-                        "where h.actividad=a.ID and h.ficha='%s'", ficha.getID()));
+                        "where h.actividad=a.id and h.ficha='%s'", ficha.getID()));
         for(int i = 0; i < result.getRowCount(); i++){
 
             Horario horario = new Horario(
+                    (String) result.getValueAt(i, "horario"),
                 (String) result.getValueAt(i, "hora_inicio"),
                 (String) result.getValueAt(i, "hora_fin"),
                 new Actividad(
                     (String) result.getValueAt(i, "actividad"),
                     (String) result.getValueAt(i, "nombre"),
-                    (String) result.getValueAt(0, "descripcion")
-                ),
-                (Integer) result.getValueAt(0, "dia")
+                    (String) result.getValueAt(i, "descripcion")
+                ), (Integer) result.getValueAt(i, "dia")
             );
+            System.out.println(horario.getDia());
             ficha.registrarHorario(horario);
         }
 
@@ -95,48 +96,21 @@ public class ControladorFicha {
                 (ficha.estaActivo())? 1:0
                 ));
         for(Horario horario : ficha.getHorarios()) {
-            consultas.add(String.format("INSERT INTO horarios_actividades VALUES('%s','%s','%s','%s','%d')",
-                    Parser.toString(horario.getInicio()), Parser.toString(horario.getFin()),
-                    horario.getActividad().getID(), ficha.getID(), horario.getDia()
-                    ));
+            registrarHorario(horario, ficha);
         }
         controladorBD.ejecutarSentencias(consultas.toArray(new String[0]));
     }
 
     private void registrarHorario(Horario horario, Ficha ficha) throws SQLException {
         SQLTable results = controladorBD.ejecutarSentencia(
-                String.format("select * from horarios_actividades where hora_inicio='%s' and hora_fin='%s' and " +
-                        "actividad='%s' and ficha='%s' and dia=%d",
-                        Parser.toString(horario.getInicio()),
-                        Parser.toString(horario.getFin()),
-                        horario.getActividad().getID(),
-                        ficha.getID(),
-                        horario.getDia()
-                        ));
+                String.format("select * from horarios_actividades where id='%s'",horario.getID()));
         if(results.getRowCount() == 0) {
-            controladorBD.ejecutarSentencia(String.format("INSERT INTO horarios_actividades VALUES('%s','%s','%s','%s','%d')",
-                    Parser.toString(horario.getInicio()), Parser.toString(horario.getFin()),
-                    horario.getActividad().getID(), ficha.getID(), horario.getDia()
-            ));
+            controladorBD.ejecutarSentencia(horario.insert(ficha.getID()));
             return;
         }
         ArrayList<String> sentencias = new ArrayList<>();
-        sentencias.add(String.format("UPDATE horarios_actividades SET hora_inicio='%s', hora_fin='%s', dia=%d " +
-                        "WHERE hora_inicio='%s' and hora_fin='%s' and actividad='%s' and ficha='%s' and dia=%d" ,
-                Parser.toString(horario.getInicio()),
-                Parser.toString(horario.getFin()),
-                horario.getDia(),
-                Parser.toString(horario.getInicio()),
-                Parser.toString(horario.getFin()),
-                horario.getActividad().getID(),
-                ficha.getID(),
-                horario.getDia()
-        ));
-        sentencias.add(String.format("UPDATE actividades SET nombre='%s', descripcion='%s' WHERE id='%s'",
-                horario.getActividad().getNombre(),
-                horario.getActividad().getDescripcion(),
-                horario.getActividad().getID()
-        ));
+        sentencias.add(horario.update());
+        sentencias.add(horario.getActividad().update());
         controladorBD.ejecutarSentencias(sentencias.toArray(new String[0]));
     }
 

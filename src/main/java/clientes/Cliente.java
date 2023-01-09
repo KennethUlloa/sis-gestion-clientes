@@ -89,7 +89,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{\n" +
+        return "Cliente\n" +
                 "   cedula='" + cedula + "'\n" +
                 "   nombres='" + nombres + "'\n" +
                 "   apellidos='" + apellidos + "'\n" +
@@ -99,8 +99,7 @@ public class Cliente {
                 "   nombreContacto='" + nombreContacto + "'\n" +
                 "   telefonoContacto='" + telefonoContacto + "'\n" +
                 "   correoElectronico='" + correoElectronico + "'\n" +
-                "   direccion='" + direccion + "'\n" +
-                '}';
+                "   direccion='" + direccion + "'\n";
     }
 
     public String getNombreCompleto() {
