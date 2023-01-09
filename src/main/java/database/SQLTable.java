@@ -1,4 +1,5 @@
 package database;
+import console.TableDisplay;
 import database.exceptions.NoSuchColumn;
 
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ public class SQLTable {
     //as
     private HashMap<String, Integer> columnIndex;
     private String tableName;
+    private String[] columnNames;
     private ArrayList<Object[]> rows;
 
     public SQLTable(ResultSet resultSet) throws SQLException {
@@ -21,9 +23,10 @@ public class SQLTable {
         columnIndex = new HashMap<>();
         rows = new ArrayList<>();
         //Fill the column names
-
+        columnNames = new String[columnCount];
         for(int i = 0 ; i < columnCount ; i++){
             columnIndex.put(metaData.getColumnName(i+1), i);
+            columnNames[i] = metaData.getColumnName(i+1);
         }
 
         //Fill the rows with the data
@@ -67,33 +70,46 @@ public class SQLTable {
 
     @Override
     public String toString() {
-        if(rows.size() == 0){
-            return "No rows selected";
-        }
-
-        String format = "┃ %-30s";
-        String output = "";
-        String separador = "╋";
-
-        for(int i = 0 ; i < getColumnCount() ; i++){
-            separador +=   "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋";
-            //separador += "-------------------------------+";
-        }
-        output += separador +"\n";
-        for(String name : columnIndex.keySet()){
-            output += String.format(format, ellipsis(name));
-        }
-        output += "┃\n"+separador+"\n";
-
-        for(Object[] row : rows){
-            for(String key : columnIndex.keySet()){
-                output += String.format(format, ellipsis( String.valueOf(row[columnIndex.get(key)])));
+        TableDisplay<SQLTable> tableDisplay = new TableDisplay<SQLTable>() {
+            SQLTable sqlTable;
+            @Override
+            public SQLTable getBase() {
+                return sqlTable;
             }
-            output += "┃\n";
-        }
-        output += separador;
 
-        return output;
+            @Override
+            public void setBase(SQLTable base) {
+                this.sqlTable = base;
+            }
+
+            @Override
+            public String getValueAt(int row, int column) {
+                Object object = sqlTable.rows.get(row)[column];
+                return String.valueOf(object);
+            }
+
+            @Override
+            public int getColumnCount() {
+                return sqlTable.getColumnCount();
+            }
+
+            @Override
+            public int getRowCount() {
+                return sqlTable.getRowCount();
+            }
+
+            @Override
+            public int getColumWidth(int column) {
+                return TableDisplay.DEFAULT;
+            }
+
+            @Override
+            public String getColumnName(int column) {
+                return sqlTable.columnNames[column];
+            }
+        };
+        tableDisplay.setBase(this);
+        return tableDisplay.toString();
     }
 
     public Object getValueAt(int row, String column) throws NoSuchColumn, IndexOutOfBoundsException {
@@ -103,7 +119,7 @@ public class SQLTable {
         return getRows().get(row)[getColumIndex(column)];
     }
 
-    public HashMap<String, Object> getRow(int row) throws IndexOutOfBoundsException{
+    public HashMap<String, Object> getRowAsMap(int row) throws IndexOutOfBoundsException{
         if(row >= getRowCount() || row < 0){
             throw new IndexOutOfBoundsException();
         }
@@ -117,10 +133,7 @@ public class SQLTable {
         return map;
     }
 
-    private String ellipsis(String data) {
-        if(data.length() >= 30) {
-            return data.substring(0,25) + "...";
-        }
-        return data;
+    public Object[] getRow(int row) {
+        return rows.get(row);
     }
 }

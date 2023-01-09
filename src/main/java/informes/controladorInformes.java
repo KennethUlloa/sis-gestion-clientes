@@ -18,7 +18,7 @@ public class controladorInformes {
         return result;
     }
 
-    public SQLTable consultarCumpleaños() throws SQLException, NoSuchColumn {
+    public SQLTable consultarCumpleanios() throws SQLException, NoSuchColumn {
         SQLTable result = controladorBD.ejecutarSentencia("select cedula, apellidos, nombres, fecha_nacimiento from clientes");
         return result;
     }
