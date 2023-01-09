@@ -48,6 +48,7 @@ public class OpcionCrearFicha extends Opcion {
             ficha.setPeso(peso);
             ficha.setAltura(altura);
             controladorFicha.registrarFicha(ficha);
+            System.out.println(ficha);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

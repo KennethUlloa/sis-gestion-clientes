@@ -94,7 +94,7 @@ public class Cliente {
                 "NOMBRES: " + nombres + " " + "APELLIDOS: " + apellidos + "\n" +
                 "FECHA DE NACIMIENTO: " + fecha + "\n" +
                 "SEXO: " + sexo + "\n" +
-                "TELEFONO: " + telefono + "'\n" +
+                "TELEFONO: " + telefono + "\n" +
                 "CONTACTO: " + nombreContacto + "\n" +
                 "TELEFONO DE CONTACTO: " + telefonoContacto + "\n" +
                 "CORREO: " + correoElectronico + "\n" +
