@@ -1,9 +1,9 @@
 # SISGECLI
 
----
 
 ## Sistema de gestión de clientes para gimnasio
 
+---
 ### Grupo 5
 - Kevin López
 - Emilio Montalvo
@@ -11,4 +11,5 @@
 - Mario Villamar
 ### Características
 - Manejo por consola
+- Base de datos portable SQLite
 
