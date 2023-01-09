@@ -1,5 +1,6 @@
 package console;
 
+import console.Informes_Reportes.OpcionModulosRep_Inf;
 import console.autenticacion.OpcionModuloUsuarios;
 import console.clientes.OpcionModuloClientes;
 import console.fichas.OpcionModuloFichas;
@@ -15,6 +16,7 @@ public class MenuPrincipal extends Menu {
         }
         agregarOpcion(new OpcionModuloClientes());
         agregarOpcion(new OpcionModuloFichas());
+        agregarOpcion(new OpcionModulosRep_Inf());
         agregarOpcion(new OpcionSalir(this));
     }
 

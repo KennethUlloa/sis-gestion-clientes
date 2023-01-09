@@ -56,12 +56,25 @@ CREATE TABLE IF NOT EXISTS "usuarios" (
 	"rol"	TEXT NOT NULL,
 	PRIMARY KEY("usuario")
 );
+
+CREATE TABLE IF NOT EXISTS "fechasespeciales" (
+                                    "descripcion"	TEXT,
+                                    "fecha"	TEXT
+);
+
 INSERT INTO "clientes" VALUES ('1750105585','Kenneth Leonardo','Ulloa Tobar','M','03-07-2000','greenlantern0@hotmail.com','0987175255','Pablo','0987353846','Av. La Bota');
 INSERT INTO "actividades" VALUES ('ac1','Fortalecimiento Muscular','Levantamiento de peso para tonificar la masa muscular.');
 INSERT INTO "actividades" VALUES ('ac2','Crossfit','Serie de ejercicios para mejorar el sistema circulatorio, respiratorio y fuerza física.');
 INSERT INTO "horarios_actividades" VALUES ('09:00','11:00','ac2','F1750105585',5);
 INSERT INTO "horarios_actividades" VALUES ('08:00','10:00','ac1','F1750105585',1);
 INSERT INTO "ficha_cliente" VALUES ('F1750105585','1750105585',60.0,165.2,'03-01-2023','05-01-2023',1);
+INSERT INTO "fechasespeciales" VALUES ('Carnaval','20-02-2023');
+INSERT INTO "fechasespeciales" VALUES ('Carnaval','21-02-2023');
+INSERT INTO "fechasespeciales" VALUES ('Viernes Santo','07-04-2023');
+INSERT INTO "fechasespeciales" VALUES ('Dia del Trabajo','01-05-2023');
+INSERT INTO "fechasespeciales" VALUES ('Dia de Difuntos','02-11-2023');
+INSERT INTO "fechasespeciales" VALUES ('Navidad','25-12-2023');
+INSERT INTO "fechasespeciales" VALUES ('Fin de Año','31-12-2023');
 INSERT INTO "usuarios" VALUES ('mario','1234','USUARIO');
 INSERT INTO "usuarios" VALUES ('jose','1234','ADMINISTRADOR');
 INSERT INTO "usuarios" VALUES ('kenneth','1234','ADMINISTRADOR');
