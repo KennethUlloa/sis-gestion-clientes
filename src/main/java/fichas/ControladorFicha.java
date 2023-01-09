@@ -49,7 +49,6 @@ public class ControladorFicha {
                     (String) result.getValueAt(i, "descripcion")
                 ), (Integer) result.getValueAt(i, "dia")
             );
-            System.out.println(horario.getDia());
             ficha.registrarHorario(horario);
         }
 

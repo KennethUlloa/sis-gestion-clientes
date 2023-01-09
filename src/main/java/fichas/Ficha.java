@@ -126,6 +126,17 @@ public class Ficha {
             }
 
             @Override
+            public int getColumWidth(int column) {
+                switch (column){
+                    case 0: return TableDisplay.MIDDLE;
+                    case 2:
+                    case 3:
+                        return TableDisplay.LITTLE;
+                    default: return TableDisplay.DEFAULT;
+                }
+            }
+
+            @Override
             public String getColumnName(int column) {
                 return columnNames[column];
             }

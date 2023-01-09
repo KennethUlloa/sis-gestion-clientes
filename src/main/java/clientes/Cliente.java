@@ -89,17 +89,16 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente\n" +
-                "   cedula='" + cedula + "'\n" +
-                "   nombres='" + nombres + "'\n" +
-                "   apellidos='" + apellidos + "'\n" +
-                "   fecha=" + fecha + "\n" +
-                "   sexo=" + sexo + "'\n" +
-                "   telefono='" + telefono + "'\n" +
-                "   nombreContacto='" + nombreContacto + "'\n" +
-                "   telefonoContacto='" + telefonoContacto + "'\n" +
-                "   correoElectronico='" + correoElectronico + "'\n" +
-                "   direccion='" + direccion + "'\n";
+        return "CLIENTE\n" +
+                "CEDULA: " + cedula + "\n" +
+                "NOMBRES: " + nombres + " " + "APELLIDOS: " + apellidos + "\n" +
+                "FECHA DE NACIMIENTO: " + fecha + "\n" +
+                "SEXO: " + sexo + "\n" +
+                "TELEFONO: " + telefono + "'\n" +
+                "CONTACTO: " + nombreContacto + "\n" +
+                "TELEFONO DE CONTACTO: " + telefonoContacto + "\n" +
+                "CORREO: " + correoElectronico + "\n" +
+                "DIRECCION: " + direccion + "\n";
     }
 
     public String getNombreCompleto() {
