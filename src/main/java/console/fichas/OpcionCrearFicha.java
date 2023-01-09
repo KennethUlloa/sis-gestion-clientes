@@ -37,7 +37,7 @@ public class OpcionCrearFicha extends Opcion {
                 throw new Exception("El cliente ya posee una ficha registrada");
             }
             double peso = input.get("* Ingresa el peso (kg) >> ", validadorPesoAltura, doubleCaster, 1);
-            double altura = input.get("* Ingresa el peso (cm) >> ", validadorPesoAltura, doubleCaster, 1);
+            double altura = input.get("* Ingresa la altura (cm) >> ", validadorPesoAltura, doubleCaster, 1);
             LocalDate fechaInicio = input.get("* Ingresa la fecha de inicio (dd-MM-aaaa) >> ",
                     validadorInactivo, dateCaster, 1);
             LocalDate fechaFin = input.get("* Ingresa la fecha de fin (dd-MM-aaaa) >> ", validadorInactivo,
