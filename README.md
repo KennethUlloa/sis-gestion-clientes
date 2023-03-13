@@ -4,9 +4,8 @@
 ## Sistema de gestión de clientes para gimnasio
 
 ---
-### Grupo 5
-- Kevin López
-- Emilio Montalvo
+### Grupo 7
+- Frankz Alarcón
 - Kenneth Ulloa
 - Mario Villamar
 ### Características
